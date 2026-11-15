@@ -1,0 +1,2131 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nathanael Creative Studio</title>
+  <link rel="icon" type="image/svg+xml" href="assets/images/brand/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/images/brand/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/images/brand/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/images/brand/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════════
+   DESIGN SYSTEM
+   Palette: warm off-white / deep forest / muted gold
+   Type: Playfair Display (display) + Inter (body)
+   ═══════════════════════════════════════════════════ */
+:root {
+  --cream:   #F7F5F0;
+  --cream2:  #EFECE5;
+  --cream3:  #E7E3D9;
+  --forest:  #1C3D2E;
+  --forest2: #255240;
+  --forest3: #0F2619;
+  --gold:    #B8932A;
+  --gold2:   #D4AA45;
+  --ink:     #1A1C19;
+  --ink2:    #3A3D38;
+  --muted:   #6B7068;
+  --dim:     #9BA098;
+  --border:  rgba(28,61,46,0.10);
+  --border2: rgba(28,61,46,0.05);
+  --shadow:  0 2px 8px rgba(28,61,46,0.06), 0 8px 32px rgba(28,61,46,0.08);
+  --shadow2: 0 4px 16px rgba(28,61,46,0.08), 0 20px 60px rgba(28,61,46,0.12);
+
+  --serif: 'Playfair Display', Georgia, serif;
+  --sans:  'Inter', system-ui, sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 76px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+body {
+  font-family: var(--sans);
+  background: var(--cream);
+  color: var(--ink);
+  line-height: 1.6;
+  overflow-x: hidden;
+  overflow-y: visible;
+  position: relative;
+  min-height: 100%;
+  -webkit-font-smoothing: antialiased;
+}
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; cursor: pointer; border: none; background: none; }
+
+/* ── PROGRESS ── */
+#prog {
+  position: fixed; top: 0; left: 0; height: 3px; z-index: 9999;
+  width: 0%; background: linear-gradient(90deg, var(--forest), var(--gold));
+  transition: width .1s; pointer-events: none; border-radius: 0 2px 2px 0;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  padding: 1.4rem 3rem;
+  display: flex; align-items: center; justify-content: space-between;
+  transition: background .35s, border-color .35s, box-shadow .35s;
+  border-bottom: 1px solid transparent;
+}
+nav.scrolled {
+  background: rgba(247,245,240,0.96);
+  backdrop-filter: blur(16px);
+  border-bottom-color: var(--border);
+  box-shadow: 0 1px 0 var(--border);
+}
+.nav-brand {
+  display: flex; align-items: center; text-decoration: none; flex-shrink: 0;
+}
+.nav-brand-logo {
+  height: 38px; width: auto; display: block;
+  transition: opacity .2s, transform .2s;
+}
+.nav-brand-logo:hover {
+  opacity: .88; transform: translateY(-1px);
+}
+.nav-brand-mark {
+  display: none;
+}
+.nav-links {
+  display: flex; gap: 2.25rem; align-items: center;
+}
+.nav-links a {
+  font-size: .84rem; font-weight: 500; color: var(--muted);
+  transition: color .2s; position: relative;
+}
+.nav-links a:hover { color: var(--forest); }
+.nav-cta {
+  background: var(--forest); color: var(--cream) !important;
+  padding: .55rem 1.4rem; border-radius: 100px;
+  font-size: .82rem !important; font-weight: 600 !important;
+  transition: background .2s, transform .15s !important;
+}
+.nav-cta:hover { background: var(--forest2) !important; transform: translateY(-1px); }
+.hamburger {
+  display: none; flex-direction: column; gap: 5px; padding: 4px;
+}
+.hamburger span {
+  display: block; width: 22px; height: 1.5px;
+  background: var(--ink); transition: transform .3s, opacity .3s;
+}
+.mobile-menu {
+  display: none; position: fixed; inset: 0;
+  background: var(--cream); z-index: 190;
+  flex-direction: column; justify-content: center;
+  align-items: center; gap: 2rem; padding: 2rem;
+}
+.mobile-menu.open { display: flex; }
+.mobile-menu a {
+  font-family: var(--serif); font-size: 2rem; font-weight: 400;
+  color: var(--ink); opacity: .6; transition: opacity .2s, color .2s;
+}
+.mobile-menu a:hover { opacity: 1; color: var(--forest); }
+.mobile-menu .mob-cta {
+  font-family: var(--sans) !important; font-size: 1rem !important;
+  background: var(--forest); color: var(--cream);
+  padding: .85rem 2.5rem; border-radius: 100px; opacity: 1 !important;
+}
+
+/* ── HERO ── */
+.hero {
+  min-height: 100svh;
+  display: grid; grid-template-columns: 1fr 1fr;
+  align-items: center;
+  padding: 8rem 3rem 5rem;
+  gap: 4rem; position: relative; overflow: hidden;
+}
+.hero-bg-ring {
+  position: absolute; right: -8%; top: 50%; transform: translateY(-50%);
+  width: 680px; height: 680px; border-radius: 50%;
+  border: 1px solid var(--border); pointer-events: none;
+  animation: spin-slow 40s linear infinite;
+}
+.hero-bg-ring2 {
+  position: absolute; right: -2%; top: 50%; transform: translateY(-50%);
+  width: 480px; height: 480px; border-radius: 50%;
+  border: 1px solid var(--border2); pointer-events: none;
+  animation: spin-slow 28s linear infinite reverse;
+}
+@keyframes spin-slow { to { transform: translateY(-50%) rotate(360deg); } }
+.hero-left { position: relative; z-index: 2; }
+.hero-spec {
+  display: inline-flex; align-items: center; gap: .6rem;
+  font-size: .72rem; font-weight: 600; letter-spacing: .12em;
+  color: var(--forest); margin-bottom: 1.75rem;
+  padding: .35rem .9rem .35rem .5rem;
+  border: 1px solid var(--border);
+  border-radius: 100px; background: var(--cream2);
+}
+.hero-spec-dot {
+  width: 7px; height: 7px; border-radius: 50%; background: var(--gold); flex-shrink: 0;
+}
+.hero-h1 {
+  font-family: var(--serif);
+  font-size: clamp(3rem, 5.5vw, 5rem);
+  font-weight: 400; line-height: 1.07;
+  letter-spacing: -.03em; color: var(--ink);
+  margin-bottom: 1.5rem;
+}
+.hero-h1 span { color: var(--forest); font-style: italic; }
+.hero-sub {
+  font-size: 1.05rem; color: var(--muted);
+  max-width: 44ch; line-height: 1.75; margin-bottom: 2.5rem;
+  font-weight: 300;
+}
+.hero-actions {
+  display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;
+  margin-bottom: 3rem;
+}
+.btn-forest {
+  background: var(--forest); color: var(--cream);
+  padding: .9rem 2rem; border-radius: 100px;
+  font-size: .9rem; font-weight: 600;
+  transition: background .2s, transform .15s, box-shadow .2s;
+  display: inline-block;
+}
+.btn-forest:hover {
+  background: var(--forest2); transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(28,61,46,0.2);
+}
+.btn-outline {
+  color: var(--forest); padding: .9rem 2rem;
+  border: 1.5px solid var(--border);
+  border-radius: 100px; font-size: .9rem; font-weight: 500;
+  transition: border-color .2s, background .2s;
+  display: inline-block;
+}
+.btn-outline:hover {
+  border-color: var(--forest); background: var(--cream2);
+}
+.hero-stats {
+  display: flex; gap: 2.5rem; padding-top: 2rem;
+  border-top: 1px solid var(--border2); flex-wrap: wrap;
+}
+.hero-stat-val {
+  font-family: var(--serif); font-size: 2.4rem; font-weight: 400;
+  color: var(--forest); letter-spacing: -.04em; line-height: 1;
+  display: block;
+}
+.hero-stat-lbl { font-size: .75rem; color: var(--muted); margin-top: .3rem; font-weight: 400; }
+
+/* Hero right : photo */
+.hero-right {
+  position: relative; z-index: 2; display: flex; justify-content: flex-end;
+}
+.hero-photo-wrap {
+  width: 100%; max-width: 420px; aspect-ratio: 3/4;
+  border-radius: 4px 120px 4px 4px;
+  overflow: hidden; position: relative;
+  box-shadow: var(--shadow2);
+}
+.hero-photo-wrap img {
+  width: 100%; height: 100%; object-fit: cover; object-position: top center;
+  image-rendering: -webkit-optimize-contrast;
+  filter: saturate(1.08) contrast(1.04) brightness(1.01);
+  transform: translateZ(0); /* GPU layer */
+}
+.hero-photo-badge {
+  position: absolute; bottom: 1.5rem; left: 50%; transform: translateX(-50%);
+  background: var(--cream); border-radius: 100px;
+  padding: .55rem 1.1rem; display: flex; align-items: center; gap: .5rem;
+  box-shadow: 0 4px 20px rgba(28,61,46,0.14);
+  white-space: nowrap;
+}
+.badge-dot { width: 8px; height: 8px; border-radius: 50%; background: #3CB371; flex-shrink: 0; animation: pulse-dot 2s ease infinite; }
+@keyframes pulse-dot { 0%,100% { box-shadow: 0 0 0 0 rgba(60,179,113,.4); } 50% { box-shadow: 0 0 0 6px rgba(60,179,113,0); } }
+.badge-text { font-size: .75rem; font-weight: 600; color: var(--forest); }
+
+/* ── PLATFORMS STRIP ── */
+.strip { background: var(--forest3); padding: 1.5rem 3rem; }
+.strip-inner {
+  max-width: 1200px; margin: 0 auto;
+  display: flex; align-items: center; gap: 2rem; flex-wrap: wrap;
+}
+.strip-label {
+  font-size: .68rem; font-weight: 600; letter-spacing: .14em;
+  color: rgba(247,245,240,.4); white-space: nowrap; flex-shrink: 0;
+  text-transform: uppercase;
+}
+.strip-div { width: 1px; height: 18px; background: rgba(255,255,255,.1); flex-shrink: 0; }
+.strip-chips { display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; }
+.chip {
+  font-size: .78rem; font-weight: 500; color: rgba(247,245,240,.55);
+  padding: .25rem .8rem; border: 1px solid rgba(255,255,255,.1);
+  border-radius: 100px; transition: color .2s, border-color .2s;
+}
+.chip:hover { color: rgba(247,245,240,.9); border-color: rgba(255,255,255,.25); }
+.chip.hi { color: var(--gold2); border-color: rgba(184,147,42,.3); }
+
+/* ── SECTION SHELL ── */
+.si {
+  max-width: 1200px; margin: 0 auto;
+  padding: 6rem 3rem;
+}
+.sec-label {
+  font-size: .68rem; font-weight: 600; letter-spacing: .16em;
+  color: var(--forest); margin-bottom: 1.25rem;
+  display: flex; align-items: center; gap: .5rem;
+  text-transform: uppercase;
+}
+.sec-label::before {
+  content: ''; display: block; width: 20px; height: 1.5px; background: var(--gold);
+}
+
+/* ── REVEAL ── */
+.reveal {
+  opacity: 0; transform: translateY(20px);
+  transition: opacity .65s cubic-bezier(.23,1,.32,1), transform .65s cubic-bezier(.23,1,.32,1);
+}
+.reveal.in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) { .reveal { opacity:1; transform:none; transition:none; } }
+
+/* ── PROBLEMS ── */
+.problems { background: var(--cream2); }
+.prob-h2 {
+  font-family: var(--serif);
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 400; letter-spacing: -.025em; line-height: 1.12;
+  max-width: 24ch; margin-bottom: 3rem;
+}
+.prob-h2 em { font-style: italic; color: var(--forest); }
+.prob-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
+  background: var(--border); border: 1px solid var(--border);
+  border-radius: 4px; overflow: hidden;
+}
+.prob-item {
+  background: var(--cream2); padding: 2rem;
+  cursor: pointer; transition: background .25s;
+}
+.prob-item:hover, .prob-item.open { background: rgba(28,61,46,0.04); }
+.prob-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; }
+.prob-title { font-size: .98rem; font-weight: 600; color: var(--ink); line-height: 1.4; }
+.prob-icon {
+  font-size: 1rem; color: var(--forest); flex-shrink: 0;
+  transition: transform .3s; margin-top: .15rem; font-weight: 300;
+}
+.prob-item.open .prob-icon { transform: rotate(45deg); }
+.prob-body {
+  max-height: 0; overflow: hidden;
+  transition: max-height .4s cubic-bezier(.23,1,.32,1);
+  font-size: .86rem; color: var(--muted); line-height: 1.75;
+}
+.prob-item.open .prob-body { max-height: 200px; padding-top: .9rem; }
+
+
+/* ── IMAGE FALLBACK SYSTEM ── */
+.img-fallback-wrap {
+  position: relative;
+  background: var(--ink);
+  overflow: hidden;
+}
+.img-fallback-placeholder {
+  display: none;
+  position: absolute;
+  inset: 0;
+  background: var(--cream2);
+  border: 1px dashed var(--border);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  text-align: center;
+  color: var(--muted);
+  z-index: 2;
+}
+.img-fallback-active .img-fallback-placeholder {
+  display: flex;
+}
+.img-fallback-active img {
+  opacity: 0 !important;
+}
+
+/* ── SELECTED WORK ── */
+.work { background: var(--cream); }
+.work-header {
+  display: flex; justify-content: space-between; align-items: flex-end;
+  margin-bottom: 3.5rem; gap: 2.5rem;
+}
+.work-h2 {
+  font-family: var(--serif);
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 500; letter-spacing: -.02em;
+}
+.work-note {
+  font-size: .88rem; color: var(--muted); max-width: 48ch; text-align: right; line-height: 1.65; font-weight: 300;
+}
+
+/* Clean 4-Project Grid: 2 columns desktop, 1 column mobile */
+.work-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2.5rem;
+}
+
+.proj-card {
+  background: var(--cream2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  transition: transform .3s ease, box-shadow .35s ease, border-color .3s ease;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+.proj-card:hover {
+  box-shadow: var(--shadow2);
+  border-color: rgba(28,61,46,0.22);
+}
+
+.proj-browser {
+  background: var(--ink);
+  padding: .65rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+}
+.b-dots { display: flex; gap: 5px; }
+.b-dots span { width: 8px; height: 8px; border-radius: 50%; }
+.b-dots span:nth-child(1) { background: #FF5F56; }
+.b-dots span:nth-child(2) { background: #FFBD2E; }
+.b-dots span:nth-child(3) { background: #27C93F; }
+/* Preview image container */
+.proj-preview-wrap {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 16/11;
+  background: #0B0E0C;
+  cursor: pointer;
+}
+.proj-preview-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  display: block;
+  transition: transform .5s cubic-bezier(.23,1,.32,1);
+}
+.proj-card:hover .proj-preview-wrap img {
+  transform: scale(1.02);
+}
+
+.proj-preview-pill {
+  position: absolute;
+  bottom: .75rem;
+  right: .75rem;
+  background: rgba(15,38,25,0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: var(--cream);
+  font-size: .65rem;
+  font-weight: 500;
+  padding: .35rem .75rem;
+  border-radius: 100px;
+  pointer-events: none;
+  border: 1px solid rgba(255,255,255,0.15);
+  display: flex;
+  align-items: center;
+  gap: .35rem;
+}
+
+/* Card Information (Permanently Visible) */
+.proj-details {
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.proj-category {
+  font-size: .66rem;
+  font-weight: 600;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--forest);
+  margin-bottom: .4rem;
+}
+.proj-title {
+  font-family: var(--serif);
+  font-size: 1.35rem;
+  font-weight: 600;
+  letter-spacing: -.01em;
+  color: var(--ink);
+  line-height: 1.25;
+  margin-bottom: .6rem;
+}
+.proj-desc {
+  font-size: .86rem;
+  color: var(--ink2);
+  line-height: 1.65;
+  margin-bottom: 1.25rem;
+  font-weight: 300;
+  flex: 1;
+}
+.proj-meta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .9rem;
+  margin-bottom: 1rem;
+  font-size: .75rem;
+  color: var(--muted);
+  border-top: 1px solid var(--border);
+  padding-top: .85rem;
+}
+.proj-meta-item strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+.proj-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .35rem;
+  margin-bottom: 1.5rem;
+}
+.proj-tag {
+  font-size: .65rem;
+  padding: .2rem .65rem;
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  color: var(--forest);
+  background: var(--cream);
+  font-weight: 500;
+}
+.proj-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: .5rem;
+}
+.btn-view-proj {
+  background: var(--forest);
+  color: var(--cream) !important;
+  padding: .7rem 1.5rem;
+  border-radius: 100px;
+  font-size: .82rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: background .2s, transform .15s, box-shadow .2s;
+}
+.btn-view-proj:hover {
+  background: var(--forest2);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(28,61,46,0.18);
+}
+
+/* ── FULL-SCREEN PROJECT VIEWER (SEPARATE PAGE EXPERIENCE) ── */
+/* When open, background scrolling is locked on both html and body */
+html.fpv-open, body.fpv-open {
+  overflow: hidden !important;
+  height: 100% !important;
+}
+
+.fullscreen-project-viewer {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  z-index: 100000;
+  background: #0E1411;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity .25s ease, visibility .25s ease;
+}
+.fullscreen-project-viewer:not(.active) {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+.fullscreen-project-viewer.active {
+  display: flex !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+}
+
+/* Header bar */
+.fpv-header {
+  height: 70px;
+  background: #141D18;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+  z-index: 20;
+}
+.fpv-header-title-box {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.fpv-category-badge {
+  font-size: .65rem;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--gold2);
+  background: rgba(184,147,42,0.15);
+  border: 1px solid rgba(184,147,42,0.3);
+  padding: .25rem .75rem;
+  border-radius: 100px;
+}
+.fpv-header-title {
+  font-family: var(--serif);
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: var(--cream);
+  letter-spacing: -.01em;
+}
+.fpv-header-meta {
+  font-size: .78rem;
+  color: rgba(247,245,240,0.5);
+  font-weight: 300;
+  border-left: 1px solid rgba(255,255,255,0.12);
+  padding-left: 1rem;
+}
+
+.fpv-close-btn {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  color: var(--cream);
+  padding: .5rem 1.2rem;
+  border-radius: 100px;
+  font-size: .82rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  transition: background .2s, border-color .2s, transform .15s;
+}
+.fpv-close-btn:hover {
+  background: rgba(255,255,255,0.18);
+  border-color: rgba(255,255,255,0.35);
+  transform: translateY(-1px);
+}
+
+/* Main viewing stage: dedicated vertical scroll container */
+.fpv-main-stage {
+  flex: 1 1 0%;
+  min-height: 0;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+  background: #090D0B;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2.5rem 1.5rem 4rem;
+  position: relative;
+  outline: none;
+}
+
+.fpv-viewport-frame {
+  width: 100%;
+  max-width: 1120px;
+  background: #1A241F;
+  border-radius: 8px;
+  overflow: visible;
+  box-shadow: 0 16px 50px rgba(0,0,0,0.6);
+  border: 1px solid rgba(255,255,255,0.08);
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+}
+
+.fpv-frame-bar {
+  background: #141D18;
+  padding: .75rem 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  border-radius: 8px 8px 0 0;
+  flex-shrink: 0;
+}
+.fpv-image-viewport {
+  position: relative;
+  width: 100%;
+  background: #0B0E0C;
+  border-radius: 0 0 8px 8px;
+  overflow: hidden;
+}
+.fpv-image-viewport img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.fpv-scroll-hint {
+  margin-top: 1.5rem;
+  text-align: center;
+  font-size: .72rem;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: rgba(247,245,240,0.55);
+}
+
+/* Bottom navigation bar */
+.fpv-footer {
+  height: 70px;
+  background: #141D18;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+  z-index: 20;
+}
+.fpv-nav-btn {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.15);
+  color: var(--cream);
+  padding: .55rem 1.25rem;
+  border-radius: 100px;
+  font-size: .82rem;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  cursor: pointer;
+  transition: background .2s, border-color .2s, color .2s;
+}
+.fpv-nav-btn:hover {
+  background: rgba(255,255,255,0.1);
+  border-color: rgba(255,255,255,0.3);
+  color: var(--gold2);
+}
+.fpv-counter {
+  font-size: .75rem;
+  font-weight: 600;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: rgba(247,245,240,0.5);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .proj-card, .btn-view-proj, .fullscreen-project-viewer {
+    transition: none !important;
+    transform: none !important;
+  }
+}
+
+/* ── JOURNEY / HOW IT FITS ── */
+.journey { background: var(--forest3); color: var(--cream); }
+.journey .sec-label { color: var(--gold2); }
+.journey .sec-label::before { background: var(--gold2); }
+.journey-h2 {
+  font-family: var(--serif);
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+  font-weight: 400; letter-spacing: -.02em; line-height: 1.15;
+  margin-bottom: 1rem;
+}
+.journey-h2 em { font-style: italic; color: var(--gold2); }
+.journey-lead { color: rgba(247,245,240,.55); font-size: .95rem; line-height: 1.75; max-width: 52ch; margin-bottom: 3rem; font-weight: 300; }
+.journey-steps {
+  display: grid; grid-template-columns: repeat(5,1fr);
+  border: 1px solid rgba(255,255,255,.07); border-radius: 4px; overflow: hidden;
+}
+.j-step {
+  padding: 2rem 1.5rem; border-right: 1px solid rgba(255,255,255,.07);
+  transition: background .25s;
+}
+.j-step:last-child { border-right: none; }
+.j-step:hover { background: rgba(247,245,240,.04); }
+.j-num { font-size: .6rem; font-weight: 600; letter-spacing: .2em; color: var(--gold2); margin-bottom: 1rem; display: block; text-transform: uppercase; }
+.j-title { font-size: .95rem; font-weight: 600; color: var(--cream); margin-bottom: .5rem; }
+.j-desc { font-size: .8rem; color: rgba(247,245,240,.45); line-height: 1.65; font-weight: 300; }
+
+/* ── SERVICES ── */
+.services { background: var(--cream); }
+.svc-h2 {
+  font-family: var(--serif);
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+  font-weight: 400; letter-spacing: -.02em; margin-bottom: .5rem;
+}
+.svc-lead { color: var(--muted); max-width: 50ch; font-size: .95rem; line-height: 1.7; margin-bottom: 1rem; font-weight: 300; }
+.svc-list { margin-top: 1rem; border-top: 1px solid var(--border); }
+.svc-row {
+  border-bottom: 1px solid var(--border);
+  display: grid; grid-template-columns: 40px 1fr auto;
+  gap: 1.5rem; align-items: start;
+  padding: 1.75rem 0; cursor: pointer;
+  transition: padding-left .3s;
+}
+.svc-row:hover { padding-left: .75rem; }
+.svc-num { font-size: .68rem; color: var(--gold); font-weight: 600; font-family: var(--sans); padding-top: .4rem; }
+.svc-name { font-size: 1.05rem; font-weight: 600; letter-spacing: -.01em; }
+.svc-tags { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .6rem; }
+.svc-tag {
+  font-size: .64rem; padding: .18rem .6rem;
+  border: 1px solid var(--border); border-radius: 100px;
+  color: var(--muted); font-weight: 500;
+}
+.svc-body { max-height: 0; overflow: hidden; transition: max-height .4s cubic-bezier(.23,1,.32,1); }
+.svc-row.open .svc-body { max-height: 400px; }
+.svc-body-inner {
+  padding: 1rem 0 .5rem;
+  font-size: .87rem; color: var(--muted); line-height: 1.75;
+}
+.svc-body-inner ul {
+  list-style: none; display: grid; grid-template-columns: 1fr 1fr;
+  gap: .4rem; margin-top: .7rem;
+}
+.svc-body-inner ul li::before { content: '→ '; color: var(--forest); font-weight: 700; }
+.svc-toggle {
+  font-size: 1.3rem; color: var(--forest); line-height: 1;
+  padding-top: .3rem; transition: transform .3s; font-weight: 300;
+}
+.svc-row.open .svc-toggle { transform: rotate(45deg); }
+
+/* ── PROCESS ── */
+.process { background: var(--cream2); }
+.proc-h2 {
+  font-family: var(--serif);
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+  font-weight: 400; letter-spacing: -.02em; margin-bottom: .75rem;
+}
+.proc-lead { color: var(--muted); max-width: 48ch; font-size: .95rem; line-height: 1.7; font-weight: 300; }
+.proc-grid {
+  display: grid; grid-template-columns: repeat(3,1fr);
+  gap: 1px; background: var(--border); border: 1px solid var(--border);
+  border-radius: 4px; overflow: hidden; margin-top: 3rem;
+}
+.proc-step {
+  background: var(--cream2); padding: 2.25rem 2rem;
+  transition: background .25s;
+}
+.proc-step:hover { background: rgba(28,61,46,0.04); }
+.proc-num {
+  font-family: var(--serif); font-size: 3.5rem; font-weight: 300;
+  color: var(--border); line-height: 1; margin-bottom: 1rem;
+  letter-spacing: -.04em; transition: color .25s;
+}
+.proc-step:hover .proc-num { color: rgba(28,61,46,0.15); }
+.proc-title { font-size: 1rem; font-weight: 600; margin-bottom: .5rem; }
+.proc-desc { font-size: .83rem; color: var(--muted); line-height: 1.65; font-weight: 300; }
+.proc-items { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: 1.25rem; }
+.proc-items span {
+  font-size: .64rem; padding: .18rem .55rem;
+  border: 1px solid var(--border); border-radius: 100px;
+  color: var(--dim); font-weight: 500;
+}
+
+/* ── WHY ── */
+.why { background: var(--cream); }
+.why-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+.why-nums { display: flex; gap: 3rem; margin-bottom: 2.5rem; flex-wrap: wrap; }
+.why-num-val {
+  font-family: var(--serif); font-size: 3.5rem; font-weight: 400;
+  color: var(--forest); letter-spacing: -.04em; line-height: 1; display: block;
+}
+.why-num-lbl { font-size: .8rem; color: var(--muted); margin-top: .3rem; font-weight: 400; }
+.why-principles { border-top: 1px solid var(--border); }
+.why-p {
+  font-size: .87rem; color: var(--muted); padding: .65rem 0;
+  border-bottom: 1px solid var(--border2);
+  display: flex; align-items: center; gap: .6rem;
+  transition: color .2s, padding-left .2s;
+}
+.why-p::before {
+  content: ''; display: block; width: 5px; height: 5px;
+  background: var(--gold); border-radius: 50%; flex-shrink: 0;
+}
+.why-p:hover { color: var(--ink); padding-left: .4rem; }
+.why-text h2 {
+  font-family: var(--serif);
+  font-size: clamp(1.6rem, 3vw, 2.6rem);
+  font-weight: 400; letter-spacing: -.02em;
+  line-height: 1.15; margin-bottom: 1.25rem;
+}
+.why-text p {
+  font-size: .95rem; color: var(--muted); line-height: 1.8;
+  margin-bottom: 1.25rem; font-weight: 300;
+}
+
+/* ── TESTIMONIALS ── */
+.testi {
+  position: relative; background: var(--forest); color: var(--cream);
+  overflow: hidden; padding: 0;
+}
+.testi .sec-label { color: var(--gold2); }
+.testi .sec-label::before { background: var(--gold2); }
+
+/* Slide stage */
+.tq-stage {
+  position: relative; min-height: 520px;
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 5rem 3rem;
+  overflow: hidden;
+}
+.tq-bg-num {
+  position: absolute; right: 3rem; top: 50%; transform: translateY(-50%);
+  font-family: var(--serif); font-size: clamp(10rem, 18vw, 18rem);
+  font-weight: 700; line-height: 1;
+  color: rgba(255,255,255,.04); pointer-events: none; user-select: none;
+  transition: opacity .6s;
+}
+.tq-label {
+  font-size: .72rem; font-weight: 600; letter-spacing: .2em;
+  text-transform: uppercase; color: var(--gold2);
+  margin-bottom: 2rem; display: flex; align-items: center; gap: .75rem;
+}
+.tq-label::before {
+  content:''; display:inline-block; width:2rem; height:2px; background:var(--gold2);
+}
+.tq-quote {
+  font-family: var(--serif);
+  font-size: clamp(1.18rem, 1.8vw, 1.35rem);
+  font-weight: 400; line-height: 1.65;
+  letter-spacing: -.01em;
+  color: var(--cream); max-width: 760px;
+  min-height: 4.5em;
+  position: relative;
+}
+.tq-quote::before {
+  content: '\201C';
+  font-family: var(--serif); font-size: 5em;
+  line-height: 0; vertical-align: -0.3em;
+  color: var(--gold); margin-right: .1em; opacity: .7;
+}
+.tq-cursor {
+  display: inline-block; width: 2px; height: 1em;
+  background: var(--gold2); vertical-align: middle;
+  margin-left: 2px; animation: blink .8s step-end infinite;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+.tq-author {
+  margin-top: 2.5rem;
+  display: flex; align-items: center; gap: 1rem;
+  opacity: 0; transform: translateY(14px);
+  transition: opacity .5s ease, transform .5s ease;
+}
+.tq-author.visible { opacity: 1; transform: translateY(0); }
+.tq-avatar {
+  width: 48px; height: 48px; border-radius: 50%;
+  background: var(--forest2); border: 2px solid var(--gold);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--serif); font-size: 1.1rem; font-weight: 700;
+  color: var(--gold2); flex-shrink: 0;
+}
+.tq-name { font-weight: 600; font-size: .95rem; color: var(--cream); }
+.tq-loc  { font-size: .78rem; color: rgba(247,245,240,.5); margin-top: .15rem; }
+
+/* Nav strip */
+.tq-nav {
+  padding: 2rem 3rem 3.5rem;
+  display: flex; align-items: center; gap: 1.5rem;
+}
+.tq-btn {
+  width: 44px; height: 44px; border-radius: 50%;
+  border: 1.5px solid rgba(255,255,255,.2);
+  background: transparent; color: var(--cream);
+  font-size: 1rem; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: background .2s, border-color .2s;
+}
+.tq-btn:hover { background: var(--forest2); border-color: var(--gold); color: var(--gold2); }
+.tq-dots { display: flex; gap: .5rem; }
+.tq-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: rgba(255,255,255,.2); cursor: pointer;
+  transition: background .3s, width .3s;
+}
+.tq-dot.active { background: var(--gold2); width: 22px; border-radius: 4px; }
+.tq-cta {
+  margin-left: auto;
+}
+.tq-cta .btn-outline {
+  border-color: rgba(255,255,255,.28);
+  color: rgba(247,245,240,.9);
+  transition: background .25s ease, color .25s ease, border-color .25s ease, transform .15s ease;
+}
+.tq-cta .btn-outline:hover {
+  background: var(--cream);
+  color: var(--forest) !important;
+  border-color: var(--cream);
+  transform: translateY(-1px);
+}
+
+/* ── ABOUT ── */
+.about { background: var(--cream2); }
+.about-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+.about-photo {
+  aspect-ratio: 3/4; border-radius: 4px 120px 4px 4px;
+  overflow: hidden; max-width: 420px;
+  box-shadow: var(--shadow2);
+}
+.about-photo img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
+.about-text h2 {
+  font-family: var(--serif);
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 400; letter-spacing: -.02em;
+  line-height: 1.1; margin-bottom: 1.5rem;
+}
+.about-text h2 em { font-style: italic; color: var(--forest); }
+.about-text p {
+  font-size: .95rem; color: var(--muted); line-height: 1.8;
+  margin-bottom: 1.25rem; font-weight: 300;
+}
+
+/* ── CONTACT ── */
+.contact { background: var(--cream); }
+.contact-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+.contact-h2 {
+  font-family: var(--serif);
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 400; letter-spacing: -.02em; line-height: 1.1;
+  margin-bottom: 1rem;
+}
+.contact-h2 em { font-style: italic; color: var(--forest); }
+.contact-lead { font-size: .95rem; color: var(--muted); line-height: 1.75; margin-bottom: 2.5rem; font-weight: 300; }
+.contact-opts { display: flex; flex-direction: column; gap: .85rem; margin-bottom: 2.5rem; }
+.contact-opt {
+  border: 1px solid var(--border); border-radius: 6px;
+  padding: 1.25rem 1.5rem; display: flex; align-items: flex-start; gap: 1rem;
+  transition: border-color .25s, background .25s, transform .2s;
+  cursor: pointer;
+}
+.contact-opt:hover {
+  border-color: var(--forest); background: rgba(28,61,46,0.03);
+  transform: translateX(4px);
+}
+.c-icon {
+  width: 40px; height: 40px; border-radius: 8px; flex-shrink: 0;
+  background: var(--cream2); border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.05rem;
+}
+.c-lbl { font-size: .68rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--dim); margin-bottom: .3rem; }
+.c-val { font-size: .95rem; font-weight: 500; color: var(--ink); word-break: break-all; }
+.c-sub { font-size: .78rem; color: var(--muted); margin-top: .15rem; font-weight: 300; }
+.c-copy {
+  margin-top: .4rem; font-size: .7rem; font-weight: 600;
+  letter-spacing: .1em; text-transform: uppercase;
+  color: var(--forest); background: none; border: none;
+  cursor: pointer; padding: 0; transition: opacity .2s;
+}
+.c-copy:hover { opacity: .6; }
+
+/* CTA box */
+.cta-box {
+  background: var(--forest); border-radius: 8px;
+  padding: 2.5rem; position: sticky; top: 5rem;
+  color: var(--cream);
+}
+.cta-box h3 {
+  font-family: var(--serif); font-size: 1.7rem; font-weight: 400;
+  letter-spacing: -.02em; margin-bottom: .75rem; color: var(--cream);
+}
+.cta-box p {
+  font-size: .87rem; color: rgba(247,245,240,.55);
+  line-height: 1.7; margin-bottom: 1.75rem; font-weight: 300;
+}
+.cta-links { display: flex; flex-direction: column; gap: .75rem; }
+.cta-primary {
+  display: block; background: var(--gold); color: var(--forest3);
+  padding: 1rem 1.5rem; border-radius: 100px; text-align: center;
+  font-size: .9rem; font-weight: 700;
+  transition: background .2s, transform .15s;
+}
+.cta-primary:hover { background: var(--gold2); transform: translateY(-1px); }
+.cta-ghost {
+  display: block; border: 1px solid rgba(255,255,255,.15); color: rgba(247,245,240,.8);
+  padding: .9rem 1.5rem; border-radius: 100px; text-align: center;
+  font-size: .87rem; font-weight: 400;
+  transition: border-color .2s, color .2s;
+}
+.cta-ghost:hover { border-color: rgba(255,255,255,.4); color: var(--cream); }
+.cta-email-show {
+  text-align: center; padding: .5rem;
+  font-size: .78rem; color: rgba(255,255,255,.25); font-style: italic; font-family: var(--serif);
+}
+
+/* ── FOOTER ── */
+footer { background: var(--forest3); color: rgba(247,245,240,.5); }
+.footer-inner {
+  max-width: 1200px; margin: 0 auto;
+  padding: 2.5rem 3rem;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 1rem;
+}
+.footer-brand {
+  display: flex; align-items: center;
+}
+.footer-brand a { display: inline-flex; align-items: center; }
+.footer-brand-logo {
+  height: 32px; width: auto; display: block;
+  transition: opacity .2s, transform .2s;
+}
+.footer-brand-logo:hover {
+  opacity: .88; transform: translateY(-1px);
+}
+.footer-copy { font-size: .75rem; }
+.footer-links { display: flex; gap: 1.5rem; }
+.footer-links a {
+  font-size: .75rem; color: rgba(247,245,240,.4);
+  transition: color .2s;
+}
+.footer-links a:hover { color: var(--gold2); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 640px) {
+  .nav-brand-logo { height: 30px; }
+  .footer-brand-logo { height: 28px; }
+}
+
+@media (max-width: 960px) {
+  .work-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .fpv-header { padding: 0 1.25rem; }
+  .fpv-header-meta { display: none; }
+  .fpv-footer { padding: 0 1.25rem; }
+  .fpv-main-stage { padding: 1.5rem 1rem 3rem; }
+}
+@media (max-width: 640px) {
+  .work-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+  .work-note { text-align: left; max-width: 100%; }
+  .work-grid { grid-template-columns: 1fr; }
+  .fpv-header-title { font-size: 1.05rem; }
+  .fpv-category-badge { display: none; }
+  .fpv-nav-title { display: none; }
+  .tq-quote { font-size: 1.05rem; line-height: 1.6; }
+}
+
+@media (max-width: 960px) {
+  .hero { grid-template-columns: 1fr; padding-top: 8rem; }
+  .hero-right { display: none; }
+  .why-layout, .about-layout, .contact-layout { grid-template-columns: 1fr; gap: 3rem; }
+  .journey-steps { grid-template-columns: 1fr 1fr; }
+  .j-step { border-right: none; border-bottom: 1px solid rgba(255,255,255,.07); }
+  .proc-grid { grid-template-columns: 1fr 1fr; }
+  nav { padding: 1.2rem 1.5rem; }
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+  .strip { padding: 1.5rem; }
+  .testi-nav { padding: 0 1.5rem; }
+  .testi-track { padding: .5rem 1.5rem 2rem; }
+  .testi-track-outer { margin: 0 -1.5rem; }
+}
+@media (max-width: 640px) {
+  .work-grid { grid-template-columns: 1fr; }
+  .wc { grid-column: span 1; }
+  .proj-card.wc .proj-img-wrap { aspect-ratio: 16/9; }
+  .journey-steps { grid-template-columns: 1fr; }
+  .proc-grid { grid-template-columns: 1fr; }
+  .work-header { flex-direction: column; align-items: flex-start; }
+  .work-note { text-align: left; max-width: 100%; }
+  .svc-body-inner ul { grid-template-columns: 1fr; }
+  .cta-box { position: static; }
+  .footer-inner { flex-direction: column; align-items: flex-start; }
+  .hero { padding: 7rem 1.5rem 4rem; }
+  .si { padding: 4rem 1.5rem; }
+  .strip { padding: 1.5rem; }
+  .strip-div { display: none; }
+  nav { padding: 1.2rem 1.5rem; }
+  .strip-inner { gap: 1rem; }
+}
+</style>
+</head>
+<body>
+
+<div id="prog"></div>
+
+<nav id="nav">
+  <a href="#" class="nav-brand" aria-label="Nathanael Creative Studio Home">
+    <img src="assets/images/brand/nathanael-creative-studio-logo.svg" alt="Nathanael Creative Studio" class="nav-brand-logo" width="182" height="40">
+  </a>
+  <div class="nav-links">
+    <a href="#work">Work</a>
+    <a href="#services">Services</a>
+    <a href="#process">Process</a>
+    <a href="#testimonials">Testimonials</a>
+    <a href="#about">About</a>
+    <a class="nav-cta" href="#contact">Book a Call</a>
+  </div>
+  <button class="hamburger" id="hamburger" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mmenu">
+  <a href="#work" onclick="closeMob()">Work</a>
+  <a href="#services" onclick="closeMob()">Services</a>
+  <a href="#process" onclick="closeMob()">Process</a>
+  <a href="#testimonials" onclick="closeMob()">Testimonials</a>
+  <a href="#about" onclick="closeMob()">About</a>
+  <a class="mob-cta" href="#contact" onclick="closeMob()">Book a Call</a>
+</div>
+
+<!-- ══ HERO ═════════════════════════════════════════════ -->
+<section id="home">
+  <div class="hero">
+    <div class="hero-bg-ring"></div>
+    <div class="hero-bg-ring2"></div>
+    <div class="hero-left">
+      <div class="hero-spec">
+        <div class="hero-spec-dot"></div>
+        Website Design · SEO · AEO · GEO
+      </div>
+      <h1 class="hero-h1">Websites that make the right clients <span>choose you.</span></h1>
+      <p class="hero-sub">I build and optimise websites for solo therapists and counsellors : designed to be found, trusted, and acted on by the people you most want to reach.</p>
+      <div class="hero-actions">
+        <a class="btn-forest" href="https://calendly.com/nathanaeloba1" target="_blank" rel="noopener">Book a Free Call</a>
+        <a class="btn-outline" href="#work">See the Work</a>
+      </div>
+      <div class="hero-stats">
+        <div>
+          <span class="hero-stat-val counter" data-target="4" data-suffix="">0</span>
+          <div class="hero-stat-lbl">Years of experience</div>
+        </div>
+        <div>
+          <span class="hero-stat-val counter" data-target="350" data-suffix="+">0</span>
+          <div class="hero-stat-lbl">Projects completed</div>
+        </div>
+        <div>
+          <span class="hero-stat-val">Worldwide</span>
+          <div class="hero-stat-lbl">Clients served globally</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-photo-wrap img-fallback-wrap">
+        <img src="assets/images/profile/nathanael-profile.jpeg" alt="Nathanael: Web Designer &amp; SEO Specialist" onerror="this.closest('.img-fallback-wrap')?.classList.add('img-fallback-active')">
+        <div class="img-fallback-placeholder">
+          <span style="font-size:1.8rem;margin-bottom:.5rem;">👤</span>
+          <span style="font-size:.75rem;font-weight:600;text-transform:uppercase;">Nathanael Profile</span>
+          <span style="font-size:.7rem;color:var(--dim);margin-top:.25rem;">assets/images/profile/nathanael-profile.jpeg</span>
+        </div>
+        <div class="hero-photo-badge">
+          <div class="badge-dot"></div>
+          <div class="badge-text">Available for new projects</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ STRIP ═════════════════════════════════════════════ -->
+<div class="strip">
+  <div class="strip-inner">
+    <span class="strip-label">Works across</span>
+    <div class="strip-div"></div>
+    <div class="strip-chips">
+      <span class="chip">Wix</span>
+      <span class="chip">Squarespace</span>
+      <span class="chip">WordPress</span>
+      <span class="chip">Webflow</span>
+      <span class="chip">Showit</span>
+      <span class="chip">Custom HTML</span>
+    </div>
+    <div class="strip-div"></div>
+    <div class="strip-chips">
+      <span class="chip hi">SEO</span>
+      <span class="chip hi">AEO</span>
+      <span class="chip hi">GEO</span>
+    </div>
+  </div>
+</div>
+
+<!-- ══ PROBLEMS ══════════════════════════════════════════ -->
+<section class="problems">
+  <div class="si">
+    <p class="sec-label reveal">Common situations</p>
+    <h2 class="prob-h2 reveal" style="transition-delay:.05s">Does your website reflect the <em>quality</em> of your practice?</h2>
+    <div class="prob-grid reveal" style="transition-delay:.1s">
+      <div class="prob-item" data-pidx="0">
+        <div class="prob-head">
+          <div class="prob-title">My website looks outdated or unprofessional</div>
+          <span class="prob-icon">+</span>
+        </div>
+        <div class="prob-body">First impressions matter : especially for therapy. A poorly designed site raises doubts before a potential client reads a single word. A redesign improves perception from the first moment.</div>
+      </div>
+      <div class="prob-item" data-pidx="1">
+        <div class="prob-head">
+          <div class="prob-title">I'm not getting enquiries from my website</div>
+          <span class="prob-icon">+</span>
+        </div>
+        <div class="prob-body">Traffic without conversions points to unclear messaging, weak calls to action, or a confusing user journey. Good design guides the right visitor toward reaching out : naturally.</div>
+      </div>
+      <div class="prob-item" data-pidx="2">
+        <div class="prob-head">
+          <div class="prob-title">I don't come up in Google search results</div>
+          <span class="prob-icon">+</span>
+        </div>
+        <div class="prob-body">Most therapy clients start with a search. Without SEO, AEO, and GEO foundations : the right structure, content, and signals : your site won't appear when they're looking.</div>
+      </div>
+      <div class="prob-item" data-pidx="3">
+        <div class="prob-head">
+          <div class="prob-title">I built it myself and something feels off</div>
+          <span class="prob-icon">+</span>
+        </div>
+        <div class="prob-body">A DIY website often gets the content right but loses something in execution : visual hierarchy, trust signals, and flow. Small, deliberate changes make a significant difference.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SELECTED WORK ══════════════════════════════════════ -->
+<section class="work" id="work">
+  <div class="si">
+    <div class="work-header reveal">
+      <h2 class="work-h2">Selected Work</h2>
+      <p class="work-note">A curated selection of website experiences, thoughtful design systems and search foundations built to help independent practitioners establish a stronger digital presence.</p>
+    </div>
+
+    <div class="work-grid">
+
+      <!-- PROJECT 1: Caroline Vieira -->
+      <div class="proj-card magnetic reveal" data-proj-id="0">
+        <div class="proj-browser">
+          <div class="b-dots"><span></span><span></span><span></span></div>
+        </div>
+        <div class="proj-preview-wrap img-fallback-wrap" onclick="openFullscreenViewer(0)">
+          <img src="assets/images/projects/project-01-preview.jpg" alt="Caroline Vieira psychotherapy practice website screenshot" loading="lazy" onerror="this.closest('.img-fallback-wrap')?.classList.add('img-fallback-active')">
+          <div class="img-fallback-placeholder">
+            <span style="font-size:1.8rem;margin-bottom:.5rem;">🖼️</span>
+            <span style="font-size:.78rem;font-weight:600;text-transform:uppercase;">Caroline Vieira Preview</span>
+            <span style="font-size:.7rem;color:var(--dim);margin-top:.25rem;">assets/images/projects/project-01-preview.jpg</span>
+          </div>
+          <div class="proj-preview-pill">View Full Project &rarr;</div>
+        </div>
+        <div class="proj-details">
+          <div class="proj-category">Integrative Transpersonal Psychotherapy</div>
+          <h3 class="proj-title">Caroline Vieira</h3>
+          <p class="proj-desc">A calm, welcoming website for Caroline Vieira, offering integrative transpersonal psychotherapy in Coleford and the Forest of Dean. The design communicates confidentiality, emotional support and accessible therapy, with clear pathways to explore in-person and online sessions.</p>
+          <div class="proj-meta-row">
+            <span class="proj-meta-item"><strong>Focus:</strong> Integrative Transpersonal Therapy</span>
+            <span class="proj-meta-item"><strong>Scope:</strong> Website Design &amp; Client Enquiry Structure</span>
+          </div>
+          <div class="proj-tags">
+            <span class="proj-tag">Integrative Therapy</span>
+            <span class="proj-tag">Forest of Dean</span>
+            <span class="proj-tag">Online Sessions</span>
+            <span class="proj-tag">Client Enquiries</span>
+          </div>
+          <div class="proj-actions">
+            <button class="btn-forest btn-view-proj" data-proj-trigger="0" onclick="openFullscreenViewer(0)" aria-haspopup="dialog">
+              View Project Showcase &rarr;
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- PROJECT 2: SDB Counselling -->
+      <div class="proj-card magnetic reveal" data-proj-id="1" style="transition-delay:.08s">
+        <div class="proj-browser">
+          <div class="b-dots"><span></span><span></span><span></span></div>
+        </div>
+        <div class="proj-preview-wrap img-fallback-wrap" onclick="openFullscreenViewer(1)">
+          <img src="assets/images/projects/project-02-preview.jpg" alt="SDB Counselling practice website screenshot" loading="lazy" onerror="this.closest('.img-fallback-wrap')?.classList.add('img-fallback-active')">
+          <div class="img-fallback-placeholder">
+            <span style="font-size:1.8rem;margin-bottom:.5rem;">🖼️</span>
+            <span style="font-size:.78rem;font-weight:600;text-transform:uppercase;">SDB Counselling Preview</span>
+            <span style="font-size:.7rem;color:var(--dim);margin-top:.25rem;">assets/images/projects/project-02-preview.jpg</span>
+          </div>
+          <div class="proj-preview-pill">View Full Project &rarr;</div>
+        </div>
+        <div class="proj-details">
+          <div class="proj-category">Private Counselling &amp; Psychotherapy</div>
+          <h3 class="proj-title">SDB Counselling</h3>
+          <p class="proj-desc">A professional, welcoming website for a counselling and psychotherapy practice offering individual counselling, couples counselling, family counselling, mediation, life coaching and online sessions. The design makes services easy to explore while providing clear information and straightforward consultation booking options.</p>
+          <div class="proj-meta-row">
+            <span class="proj-meta-item"><strong>Location:</strong> Bromley &amp; Harley Street, London</span>
+            <span class="proj-meta-item"><strong>Scope:</strong> Practice Information Architecture</span>
+          </div>
+          <div class="proj-tags">
+            <span class="proj-tag">Private Counselling</span>
+            <span class="proj-tag">Couples Counselling</span>
+            <span class="proj-tag">Family Counselling</span>
+            <span class="proj-tag">Online Sessions</span>
+            <span class="proj-tag">Consultation Booking</span>
+          </div>
+          <div class="proj-actions">
+            <button class="btn-forest btn-view-proj" data-proj-trigger="1" onclick="openFullscreenViewer(1)" aria-haspopup="dialog">
+              View Project Showcase &rarr;
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- PROJECT 3: Serenova -->
+      <div class="proj-card magnetic reveal" data-proj-id="2" style="transition-delay:.14s">
+        <div class="proj-browser">
+          <div class="b-dots"><span></span><span></span><span></span></div>
+        </div>
+        <div class="proj-preview-wrap img-fallback-wrap" onclick="openFullscreenViewer(2)">
+          <img src="assets/images/projects/project-03-preview.jpg" alt="Serenova therapy and wellness coaching website screenshot" loading="lazy" onerror="this.closest('.img-fallback-wrap')?.classList.add('img-fallback-active')">
+          <div class="img-fallback-placeholder">
+            <span style="font-size:1.8rem;margin-bottom:.5rem;">🖼️</span>
+            <span style="font-size:.78rem;font-weight:600;text-transform:uppercase;">Serenova Preview</span>
+            <span style="font-size:.7rem;color:var(--dim);margin-top:.25rem;">assets/images/projects/project-03-preview.jpg</span>
+          </div>
+          <div class="proj-preview-pill">View Full Project &rarr;</div>
+        </div>
+        <div class="proj-details">
+          <div class="proj-category">Therapy &amp; Wellness Coaching</div>
+          <h3 class="proj-title">Serenova</h3>
+          <p class="proj-desc">A warm, calming website for a therapy and wellness coaching brand, designed to help visitors explore support for stress, anxiety, emotional overwhelm and life transitions. The experience combines reassuring messaging, a clear service presentation and accessible pathways to book a session or take a wellness assessment.</p>
+          <div class="proj-meta-row">
+            <span class="proj-meta-item"><strong>Focus:</strong> Therapy &amp; Wellness Coaching</span>
+            <span class="proj-meta-item"><strong>Scope:</strong> Website Design &amp; Booking Experience</span>
+          </div>
+          <div class="proj-tags">
+            <span class="proj-tag">Mental Wellbeing</span>
+            <span class="proj-tag">Therapy &amp; Coaching</span>
+            <span class="proj-tag">Stress &amp; Anxiety</span>
+            <span class="proj-tag">Life Transitions</span>
+            <span class="proj-tag">Session Booking</span>
+          </div>
+          <div class="proj-actions">
+            <button class="btn-forest btn-view-proj" data-proj-trigger="2" onclick="openFullscreenViewer(2)" aria-haspopup="dialog">
+              View Project Showcase &rarr;
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- PROJECT 4: Vanguard -->
+      <div class="proj-card magnetic reveal" data-proj-id="3" style="transition-delay:.2s">
+        <div class="proj-browser">
+          <div class="b-dots"><span></span><span></span><span></span></div>
+        </div>
+        <div class="proj-preview-wrap img-fallback-wrap" onclick="openFullscreenViewer(3)">
+          <img src="assets/images/projects/project-04-preview.png" alt="Vanguard executive leadership and strategic advisory website screenshot" loading="lazy" onerror="this.closest('.img-fallback-wrap')?.classList.add('img-fallback-active')">
+          <div class="img-fallback-placeholder">
+            <span style="font-size:1.8rem;margin-bottom:.5rem;">🖼️</span>
+            <span style="font-size:.78rem;font-weight:600;text-transform:uppercase;">Vanguard Preview</span>
+            <span style="font-size:.7rem;color:var(--dim);margin-top:.25rem;">assets/images/projects/project-04-preview.png</span>
+          </div>
+          <div class="proj-preview-pill">View Full Project &rarr;</div>
+        </div>
+        <div class="proj-details">
+          <div class="proj-category">Executive Leadership &amp; Strategic Advisory</div>
+          <h3 class="proj-title">Vanguard</h3>
+          <p class="proj-desc">A premium digital presence for Vanguard, presenting strategic advisory, leadership consulting, workshops and coaching for high-level business operators. The design communicates authority, discretion and strategic clarity through a sophisticated visual identity and focused messaging.</p>
+          <div class="proj-meta-row">
+            <span class="proj-meta-item"><strong>Focus:</strong> Executive Leadership &amp; Strategic Advisory</span>
+            <span class="proj-meta-item"><strong>Scope:</strong> Website Design &amp; Brand Positioning</span>
+          </div>
+          <div class="proj-tags">
+            <span class="proj-tag">Executive Advisory</span>
+            <span class="proj-tag">Leadership Strategy</span>
+            <span class="proj-tag">Business Consulting</span>
+            <span class="proj-tag">Workshops &amp; Coaching</span>
+            <span class="proj-tag">Premium Brand Experience</span>
+          </div>
+          <div class="proj-actions">
+            <button class="btn-forest btn-view-proj" data-proj-trigger="3" onclick="openFullscreenViewer(3)" aria-haspopup="dialog">
+              View Project Showcase &rarr;
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ JOURNEY ════════════════════════════════════════════ -->
+<section class="journey" id="approach">
+  <div class="si">
+    <p class="sec-label reveal">The full picture</p>
+    <h2 class="journey-h2 reveal" style="transition-delay:.05s">A website without SEO is invisible. SEO without a strong website <em>wastes the traffic.</em></h2>
+    <p class="journey-lead reveal" style="transition-delay:.08s">SEO, AEO, and GEO work together with good design : so the right clients find you in Google, AI-generated answers, and voice search; and when they do, they trust your practice and know how to reach you.</p>
+    <div class="journey-steps reveal" style="transition-delay:.12s">
+      <div class="j-step"><span class="j-num">Search</span><div class="j-title">The right people find you</div><div class="j-desc">SEO, AEO, and GEO foundations ensure your practice appears across Google, AI answers, and voice search.</div></div>
+      <div class="j-step"><span class="j-num">Discover</span><div class="j-title">First impression lands</div><div class="j-desc">Within seconds, the visitor understands what you offer, who it's for, and whether they're in the right place.</div></div>
+      <div class="j-step"><span class="j-num">Understand</span><div class="j-title">Your offer is clear</div><div class="j-desc">Clear messaging and content hierarchy tell the visitor exactly what you offer and why you're the right fit.</div></div>
+      <div class="j-step"><span class="j-num">Trust</span><div class="j-title">Confidence builds</div><div class="j-desc">Design quality, social proof, and consistent structure reassure the visitor your practice is credible.</div></div>
+      <div class="j-step"><span class="j-num">Act</span><div class="j-title">Next step is obvious</div><div class="j-desc">A clear path and low friction turn interest into an enquiry or a booked session.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SERVICES ═══════════════════════════════════════════ -->
+<section class="services" id="services">
+  <div class="si">
+    <div class="reveal">
+      <p class="sec-label">What I do</p>
+      <h2 class="svc-h2">Website design, SEO, AEO &amp; GEO for therapy practices.</h2>
+      <p class="svc-lead">Every service is tailored to solo practitioners : combining design, structure, and full-spectrum discoverability across Google, AI assistants, and generative search.</p>
+    </div>
+    <div class="svc-list reveal" style="transition-delay:.1s">
+
+      <div class="svc-row" role="button" tabindex="0" aria-expanded="false">
+        <span class="svc-num">01</span>
+        <div>
+          <div class="svc-name">New Website Design &amp; Build</div>
+          <div class="svc-tags"><span class="svc-tag">New website</span><span class="svc-tag">Responsive</span><span class="svc-tag">SEO-ready</span><span class="svc-tag">Any platform</span></div>
+          <div class="svc-body"><div class="svc-body-inner">
+            <p>A website built around how your practice works : your audience, how clients make decisions, and what makes you the right choice for them.</p>
+            <ul><li>Page structure &amp; user journey</li><li>Visual design aligned with your brand</li><li>Responsive across all devices</li><li>SEO foundations from the start</li><li>Clear calls to action</li><li>Quality review before launch</li></ul>
+          </div></div>
+        </div>
+        <span class="svc-toggle">+</span>
+      </div>
+
+      <div class="svc-row" role="button" tabindex="0" aria-expanded="false">
+        <span class="svc-num">02</span>
+        <div>
+          <div class="svc-name">Website Redesign</div>
+          <div class="svc-tags"><span class="svc-tag">Existing site</span><span class="svc-tag">Structure</span><span class="svc-tag">Conversion</span></div>
+          <div class="svc-body"><div class="svc-body-inner">
+            <p>Your existing website becomes the starting point. A redesign improves structure, trust, usability, and conversion.</p>
+            <ul><li>Audit of what's working and what isn't</li><li>Restructured pages &amp; content hierarchy</li><li>Improved visual clarity &amp; trust signals</li><li>Better mobile experience</li><li>Stronger calls to action</li><li>SEO foundations where missing</li></ul>
+          </div></div>
+        </div>
+        <span class="svc-toggle">+</span>
+      </div>
+
+      <div class="svc-row" role="button" tabindex="0" aria-expanded="false">
+        <span class="svc-num">03</span>
+        <div>
+          <div class="svc-name">Website Optimisation</div>
+          <div class="svc-tags"><span class="svc-tag">UX</span><span class="svc-tag">Performance</span><span class="svc-tag">Usability</span></div>
+          <div class="svc-body"><div class="svc-body-inner">
+            <p>When the website exists but isn't performing, optimisation targets the specific problems.</p>
+            <ul><li>Friction in the visitor journey</li><li>Page clarity &amp; content structure</li><li>Mobile experience improvements</li><li>CTA hierarchy &amp; placement</li><li>Accessibility &amp; usability refinements</li></ul>
+          </div></div>
+        </div>
+        <span class="svc-toggle">+</span>
+      </div>
+
+      <div class="svc-row" role="button" tabindex="0" aria-expanded="false">
+        <span class="svc-num">04</span>
+        <div>
+          <div class="svc-name">SEO · AEO · GEO</div>
+          <div class="svc-tags"><span class="svc-tag">Search foundations</span><span class="svc-tag">Local SEO</span><span class="svc-tag">AI search visibility</span><span class="svc-tag">Answer engines</span><span class="svc-tag">Generative AI</span></div>
+          <div class="svc-body"><div class="svc-body-inner">
+            <p>Search has changed. Clients use Google, ChatGPT, Perplexity, and Siri. This service covers all three layers of modern discoverability.</p>
+            <p style="margin-top:.5rem;font-size:.82rem"><strong style="color:var(--ink)">SEO</strong> : Rankings in Google and Bing for the searches that matter.</p>
+            <p style="margin-top:.4rem;font-size:.82rem"><strong style="color:var(--ink)">AEO</strong> : Featured snippets, People Also Ask, and voice search results.</p>
+            <p style="margin-top:.4rem;font-size:.82rem"><strong style="color:var(--ink)">GEO</strong> : Cited and recommended when clients ask ChatGPT or Perplexity for a therapist.</p>
+            <ul style="margin-top:1rem"><li>Site structure &amp; internal linking</li><li>Metadata, schema &amp; structured data</li><li>Content for people and AI</li><li>Local SEO for therapy practices</li><li>Authority &amp; citation signals</li><li>Technical SEO foundations</li></ul>
+          </div></div>
+        </div>
+        <span class="svc-toggle">+</span>
+      </div>
+
+      <div class="svc-row" role="button" tabindex="0" aria-expanded="false">
+        <span class="svc-num">05</span>
+        <div>
+          <div class="svc-name">Website + SEO · AEO · GEO Combined</div>
+          <div class="svc-tags"><span class="svc-tag">Full package</span><span class="svc-tag">Strategy</span><span class="svc-tag">Search + Design</span><span class="svc-tag">AI visibility</span></div>
+          <div class="svc-body"><div class="svc-body-inner">
+            <p>The complete package : design and discoverability planned together from day one.</p>
+            <ul><li>SEO-aware page structure &amp; hierarchy</li><li>Content for people, search &amp; AI engines</li><li>Metadata, schema &amp; structured data</li><li>AEO &amp; GEO content strategy</li><li>Authority &amp; citation signals</li><li>Built to attract the clients you want</li></ul>
+          </div></div>
+        </div>
+        <span class="svc-toggle">+</span>
+      </div>
+
+    </div>
+    <div class="reveal" style="margin-top:2.5rem;transition-delay:.15s">
+      <a class="btn-forest" href="#contact">Discuss Your Project</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PROCESS ════════════════════════════════════════════ -->
+<section class="process" id="process">
+  <div class="si">
+    <div class="reveal">
+      <p class="sec-label">How it works</p>
+      <h2 class="proc-h2">A clear process. No surprises.</h2>
+      <p class="proc-lead">Every project moves through the same six stages : from understanding the practice to launch and beyond.</p>
+    </div>
+    <div class="proc-grid reveal" style="transition-delay:.1s">
+      <div class="proc-step"><div class="proc-num">01</div><div class="proc-title">Discover</div><div class="proc-desc">Understanding your practice, clients, goals, and current website before anything else.</div><div class="proc-items"><span>Your practice</span><span>Target clients</span><span>Goals</span><span>Site audit</span></div></div>
+      <div class="proc-step"><div class="proc-num">02</div><div class="proc-title">Plan</div><div class="proc-desc">Mapping pages, content, the client journey, and SEO direction before design begins.</div><div class="proc-items"><span>Page structure</span><span>Content planning</span><span>Client journey</span><span>SEO direction</span></div></div>
+      <div class="proc-step"><div class="proc-num">03</div><div class="proc-title">Design</div><div class="proc-desc">Visual direction, layouts, trust elements, and CTA strategy built around the plan.</div><div class="proc-items"><span>Visual direction</span><span>Page layouts</span><span>Responsive</span><span>Trust elements</span></div></div>
+      <div class="proc-step"><div class="proc-num">04</div><div class="proc-title">Build</div><div class="proc-desc">The full website build : design implemented with responsive structure and usability in mind.</div><div class="proc-items"><span>Full build</span><span>Responsive</span><span>Interactions</span><span>Visual quality</span></div></div>
+      <div class="proc-step"><div class="proc-num">05</div><div class="proc-title">Optimise</div><div class="proc-desc">Refining mobile, SEO foundations, content clarity, accessibility, and conversion paths.</div><div class="proc-items"><span>Mobile</span><span>SEO foundations</span><span>Content clarity</span><span>Accessibility</span></div></div>
+      <div class="proc-step"><div class="proc-num">06</div><div class="proc-title">Launch</div><div class="proc-desc">A thorough quality check across all devices and interactions before going live.</div><div class="proc-items"><span>Quality review</span><span>Cross-device</span><span>Final approval</span><span>Launch</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ WHY ════════════════════════════════════════════════ -->
+<section class="why">
+  <div class="si">
+    <div class="why-layout">
+      <div class="reveal">
+        <p class="sec-label">Why work with me</p>
+        <div class="why-nums">
+          <div><span class="why-num-val counter" data-target="4" data-suffix="">0</span><div class="why-num-lbl">Years of experience</div></div>
+          <div><span class="why-num-val counter" data-target="350" data-suffix="+">0</span><div class="why-num-lbl">Projects completed</div></div>
+        </div>
+        <div class="why-principles">
+          <div class="why-p">Good websites are not accidents</div>
+          <div class="why-p">Purposeful design, not decoration</div>
+          <div class="why-p">Responsive as a requirement</div>
+          <div class="why-p">SEO-aware from the start</div>
+          <div class="why-p">Conversion-focused thinking</div>
+          <div class="why-p">Clear communication throughout</div>
+          <div class="why-p">Attention to what actually matters</div>
+        </div>
+      </div>
+      <div class="why-text reveal" style="transition-delay:.1s">
+        <h2>Focused on therapists. Experienced with websites.</h2>
+        <p>After four years and over 350 projects, the work stays intentionally focused on solo practitioners : because that context produces better, more relevant work than a generalist approach.</p>
+        <p>Every project combines design thinking with an understanding of how therapy clients search, what they need to see before they trust a practice, and how a website can move them from interest to enquiry.</p>
+        <p>The goal is always the same: a website that works for your practice, not just one that looks good.</p>
+        <a class="btn-forest" href="#contact">Start a Project</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ TESTIMONIALS ═══════════════════════════════════════ -->
+<section class="testi" id="testimonials">
+  <div class="tq-stage" id="tqStage">
+    <div class="tq-bg-num" id="tqBgNum">01</div>
+    <p class="tq-label">Client feedback</p>
+    <div class="tq-quote" id="tqQuote"><span class="tq-cursor" id="tqCursor"></span></div>
+    <div class="tq-author" id="tqAuthor">
+      <div class="tq-avatar" id="tqInit"></div>
+      <div>
+        <div class="tq-name" id="tqName"></div>
+        <div class="tq-loc"  id="tqLoc"></div>
+      </div>
+    </div>
+  </div>
+  <div class="tq-nav">
+    <button class="tq-btn" id="tqPrev" aria-label="Previous">&#8592;</button>
+    <div class="tq-dots" id="tqDots"></div>
+    <button class="tq-btn" id="tqNext" aria-label="Next">&#8594;</button>
+    <div class="tq-cta">
+      <a class="btn-outline tq-cta-btn" href="#contact">Start a Project</a>
+    </div>
+  </div>
+</section>
+<!-- ══ ABOUT ══════════════════════════════════════════════ -->
+<section class="about" id="about">
+  <div class="si">
+    <div class="about-layout">
+      <div class="about-photo reveal img-fallback-wrap">
+        <img src="assets/images/profile/nathanael-profile.jpeg" alt="Nathanael: Web Designer &amp; SEO Specialist" onerror="this.closest('.img-fallback-wrap')?.classList.add('img-fallback-active')">
+        <div class="img-fallback-placeholder">
+          <span style="font-size:1.8rem;margin-bottom:.5rem;">👤</span>
+          <span style="font-size:.75rem;font-weight:600;text-transform:uppercase;">Nathanael Profile</span>
+          <span style="font-size:.7rem;color:var(--dim);margin-top:.25rem;">assets/images/profile/nathanael-profile.jpeg</span>
+        </div>
+      </div>
+      <div class="about-text reveal" style="transition-delay:.1s">
+        <p class="sec-label">About</p>
+        <h2>Hi, I'm Nathanael. I build websites that <em>work.</em></h2>
+        <p>I specialise in web design and SEO for solo therapists and counsellors. Over the last four years I've helped practitioners across the UK, US, Australia and beyond improve how their practices show up online : and how well their websites turn visitors into clients.</p>
+        <p>My approach starts with understanding your practice, your clients, and what you want the website to do : before any design begins. The result is a website that's specific to you, not a template with your name on it.</p>
+        <p>I work across all major website platforms and handle everything from a full new build to a redesign or an SEO overhaul.</p>
+        <a class="btn-forest" href="#contact">Let's Talk</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CONTACT ════════════════════════════════════════════ -->
+<section class="contact" id="contact">
+  <div class="si">
+    <div class="contact-layout">
+      <div class="reveal">
+        <p class="sec-label">Get in touch</p>
+        <h2 class="contact-h2">Ready to get started? <em>Let's talk.</em></h2>
+        <p class="contact-lead">Book a free call or send me an email : we'll talk about your practice, your website, and what would actually make a difference.</p>
+        <div class="contact-opts">
+          <a class="contact-opt" href="https://calendly.com/nathanaeloba1" target="_blank" rel="noopener">
+            <div class="c-icon">📅</div>
+            <div><div class="c-lbl">Book a Call</div><div class="c-val">Calendly</div><div class="c-sub">Pick a time : free, no pressure.</div></div>
+          </a>
+          <div class="contact-opt">
+            <div class="c-icon">✉️</div>
+            <div><div class="c-lbl">Email</div><div class="c-val" id="email-disp">nathanaeloba1@gmail.com</div><button class="c-copy" onclick="copyEmail()">Copy address</button></div>
+          </div>
+          <a class="contact-opt" href="https://www.linkedin.com/in/nathanael-obaloluwa-584103348/" target="_blank" rel="noopener">
+            <div class="c-icon" style="font-size:.85rem;font-weight:700;font-family:var(--sans);">in</div>
+            <div><div class="c-lbl">LinkedIn</div><div class="c-val">Nathanael Obaloluwa</div><div class="c-sub">View my profile →</div></div>
+          </a>
+        </div>
+      </div>
+      <div class="cta-box reveal" style="transition-delay:.1s">
+        <h3>Book a free 20-minute call.</h3>
+        <p>We'll look at your current website together, talk through what's working, and figure out whether working together makes sense. No pitch, no pressure.</p>
+        <div class="cta-links">
+          <a class="cta-primary" href="https://calendly.com/nathanaeloba1" target="_blank" rel="noopener">Book on Calendly →</a>
+          <a class="cta-ghost" href="mailto:nathanaeloba1@gmail.com">Email me instead</a>
+        </div>
+        <p class="cta-email-show">nathanaeloba1@gmail.com</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ═════════════════════════════════════════════ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a href="#" aria-label="Nathanael Creative Studio Home">
+        <img src="assets/images/brand/nathanael-creative-studio-logo-light.svg" alt="Nathanael Creative Studio" class="footer-brand-logo" width="160" height="35">
+      </a>
+    </div>
+    <span class="footer-copy">Website Design · SEO · AEO · GEO for therapists &amp; counsellors</span>
+    <div class="footer-links">
+      <a href="#work">Work</a>
+      <a href="#services">Services</a>
+      <a href="#contact">Contact</a>
+      <a href="https://www.linkedin.com/in/nathanael-obaloluwa-584103348/" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ── DATA ─────────────────────────────────────────── */
+const testimonials = [
+  {
+    q: "I was referred to Nathanael by a colleague when my practice needed a complete website overhaul. He restructured the entire flow of the site so that prospective clients immediately understand my approach and clinical specialisms. Within weeks of launching, I noticed inquiries were much more aligned with the type of therapy I offer, and booking introductory consultations has become completely effortless.",
+    name: "Oliver Bennett",
+    loc: "United Kingdom",
+    init: "OB"
+  },
+  {
+    q: "I found Nathanael while searching for a designer who understands private practice. My previous website felt generic and never quite reflected the warm, calm atmosphere of my therapy room. Nathanael delivered a thoughtful design with clear service pathways and fee transparency. My clients frequently mention how reassuring and clear the website was before they decided to reach out.",
+    name: "Charlotte Mitchell",
+    loc: "United Kingdom",
+    init: "CM"
+  },
+  {
+    q: "Nathanael conducted a thorough audit of my website and identified why visitors were leaving without booking. His redesign made navigation intuitive and greatly improved my local search visibility in London. Since the update, my practice is consistently showing up on Google for my core specialisms, and the quality of enquiries has noticeably improved.",
+    name: "James Whitmore",
+    loc: "United Kingdom",
+    init: "JW"
+  },
+  {
+    q: "I reached out to Nathanael because my old website looked dated and was awkward to navigate on mobile. He completely transformed the mobile experience and organized my service pages into clear, accessible pathways. The new site gives prospective clients a genuine sense of ease, and I have seen a steady increase in direct consultation bookings through the site.",
+    name: "Emily Parker",
+    loc: "United Kingdom",
+    init: "EP"
+  },
+  {
+    q: "After seeing the clean, high-trust website Nathanael created for another therapist, I asked him to redesign my own practice site. He took the time to understand my client base and created a layout that addresses client hesitations with care and empathy. The site now looks truly professional, and it has given me tremendous confidence in my digital presence.",
+    name: "Daniel Foster",
+    loc: "United Kingdom",
+    init: "DF"
+  },
+  {
+    q: "I connected with Nathanael when restructuring my private counseling practice. He helped clarify my messaging, built clean care pathways, and optimized my local SEO foundations. Prospective clients now arrive at our initial consultation already having a clear sense of how I work and what to expect, which makes the initial intake so much smoother.",
+    name: "Sarah Collins",
+    loc: "United States",
+    init: "SC"
+  },
+  {
+    q: "I booked a call with Nathanael because I wanted a website that reflected my years of clinical experience without feeling corporate or cold. The new site strikes the exact right balance between clinical authority and genuine warmth. Inquiries have increased, and clients routinely comment on how clean and easy it was to find the information they needed.",
+    name: "Matthew Brooks",
+    loc: "Canada",
+    init: "MB"
+  },
+  {
+    q: "Nathanael reached out with a very specific, respectful review of my site's search foundations and page hierarchy. Working with him was seamless from start to finish. He turned a cluttered website into a calm, focused digital space that guides visitors naturally toward making contact. It has made a tangible, positive difference to my practice's client intake.",
+    name: "Sophie Taylor",
+    loc: "Australia",
+    init: "ST"
+  }
+];
+
+/* ── TESTIMONIAL TYPEWRITER ENGINE (MANUAL READER CONTROL) ── */
+(function() {
+  const quotes  = testimonials;
+  let cur = 0, typeTimer = null;
+  const SPEED = 48; // Relaxed, comfortable reading pace (ms/char)
+
+  const quoteEl  = document.getElementById('tqQuote');
+  const cursorEl = document.getElementById('tqCursor');
+  const authorEl = document.getElementById('tqAuthor');
+  const initEl   = document.getElementById('tqInit');
+  const nameEl   = document.getElementById('tqName');
+  const locEl    = document.getElementById('tqLoc');
+  const bgNumEl  = document.getElementById('tqBgNum');
+  const dotsEl   = document.getElementById('tqDots');
+  const prevBtn  = document.getElementById('tqPrev');
+  const nextBtn  = document.getElementById('tqNext');
+
+  function buildDots() {
+    dotsEl.innerHTML = '';
+    quotes.forEach((_, i) => {
+      const d = document.createElement('button');
+      d.className = 'tq-dot' + (i === cur ? ' active' : '');
+      d.setAttribute('aria-label', 'Slide ' + (i+1));
+      d.addEventListener('click', () => goTo(i));
+      dotsEl.appendChild(d);
+    });
+  }
+
+  function updateDots() {
+    dotsEl.querySelectorAll('.tq-dot').forEach((d, i) => {
+      d.classList.toggle('active', i === cur);
+    });
+  }
+
+  function typeText(text, cb) {
+    clearTimeout(typeTimer);
+    quoteEl.textContent = '';
+    cursorEl.style.animation = 'blink .8s step-end infinite';
+    cursorEl.style.opacity = '1';
+    quoteEl.appendChild(cursorEl);
+    let i = 0;
+    function tick() {
+      if (i < text.length) {
+        quoteEl.insertBefore(document.createTextNode(text[i]), cursorEl);
+        i++;
+        typeTimer = setTimeout(tick, SPEED);
+      } else {
+        // Complete testimonial remains readable indefinitely
+        cursorEl.style.animation = 'none';
+        cursorEl.style.opacity = '0';
+        authorEl.classList.add('visible');
+        if (cb) cb();
+      }
+    }
+    tick();
+  }
+
+  function showSlide(idx, skipType) {
+    const t = quotes[idx];
+    authorEl.classList.remove('visible');
+    bgNumEl.textContent = String(idx + 1).padStart(2, '0');
+    initEl.textContent  = t.init;
+    nameEl.textContent  = t.name;
+    locEl.textContent   = t.loc;
+    updateDots();
+
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (skipType || prefersReduced) {
+      clearTimeout(typeTimer);
+      quoteEl.textContent = t.q;
+      quoteEl.appendChild(cursorEl);
+      cursorEl.style.animation = 'none';
+      cursorEl.style.opacity = '0';
+      authorEl.classList.add('visible');
+    } else {
+      typeText(t.q);
+    }
+  }
+
+  function goTo(idx) {
+    // 100% reader-controlled navigation - zero autoplay progression
+    cur = (idx + quotes.length) % quotes.length;
+    showSlide(cur, false);
+  }
+
+  buildDots();
+  showSlide(0, false);
+
+  prevBtn.addEventListener('click', () => goTo(cur - 1));
+  nextBtn.addEventListener('click', () => goTo(cur + 1));
+
+  // Keyboard navigation
+  document.addEventListener('keydown', e => {
+    const s = document.getElementById('testimonials');
+    if (!s) return;
+    const r = s.getBoundingClientRect();
+    if (r.top < window.innerHeight && r.bottom > 0) {
+      if (e.key === 'ArrowLeft')  goTo(cur - 1);
+      if (e.key === 'ArrowRight') goTo(cur + 1);
+    }
+  });
+})()
+
+/* ── PROGRESS BAR ─────────────────────────────────── */
+const prog = document.getElementById('prog');
+window.addEventListener('scroll', () => {
+  prog.style.width = (window.scrollY/(document.documentElement.scrollHeight-window.innerHeight)*100)+'%';
+}, {passive:true});
+
+/* ── NAV SCROLL ───────────────────────────────────── */
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY>30), {passive:true});
+
+/* ── MOBILE MENU ──────────────────────────────────── */
+document.getElementById('hamburger').addEventListener('click', () => document.getElementById('mmenu').classList.toggle('open'));
+function closeMob() { document.getElementById('mmenu').classList.remove('open'); }
+
+/* ── SCROLL REVEALS ───────────────────────────────── */
+new IntersectionObserver((entries) => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('in'); });
+}, {threshold:0.1}).observe !== undefined && (() => {
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('in'); });
+  }, {threshold:0.08});
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+})();
+
+/* ── COUNTERS ─────────────────────────────────────── */
+const cntObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if(!e.isIntersecting) return;
+    const el = e.target, target = parseInt(el.dataset.target), suffix = el.dataset.suffix||'';
+    let n = 0;
+    const timer = setInterval(() => {
+      n += Math.ceil(target/60);
+      if(n>=target) { n=target; clearInterval(timer); }
+      el.textContent = n+suffix;
+    }, 20);
+    cntObs.unobserve(el);
+  });
+}, {threshold:.5});
+document.querySelectorAll('.counter').forEach(el => cntObs.observe(el));
+
+/* ── PROBLEM ACCORDION ────────────────────────────── */
+document.querySelectorAll('.prob-item').forEach(item => {
+  item.addEventListener('click', () => {
+    const was = item.classList.contains('open');
+    document.querySelectorAll('.prob-item').forEach(i => i.classList.remove('open'));
+    if(!was) item.classList.add('open');
+  });
+});
+
+/* ── SERVICE ACCORDION ────────────────────────────── */
+document.querySelectorAll('.svc-row').forEach(row => {
+  row.addEventListener('click', () => {
+    const was = row.classList.contains('open');
+    document.querySelectorAll('.svc-row').forEach(r => { r.classList.remove('open'); r.setAttribute('aria-expanded','false'); });
+    if(!was) { row.classList.add('open'); row.setAttribute('aria-expanded','true'); }
+  });
+  row.addEventListener('keydown', e => { if(e.key==='Enter'||e.key===' ') { e.preventDefault(); row.click(); } });
+});
+
+/* ── MAGNETIC TILT CARDS ──────────────────────────── */
+document.querySelectorAll('.magnetic').forEach(card => {
+  let glowEl = null;
+  card.addEventListener('mouseenter', () => {
+    card.style.transition = 'transform .12s ease, box-shadow .25s ease';
+    if (!glowEl) {
+      glowEl = document.createElement('div');
+      glowEl.style.cssText = 'position:absolute;pointer-events:none;width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,rgba(60,179,113,.22) 0%,transparent 70%);transform:translate(-50%,-50%);transition:opacity .3s;z-index:10';
+      card.style.position = 'relative';
+      card.appendChild(glowEl);
+    }
+    glowEl.style.opacity = '1';
+  });
+  card.addEventListener('mousemove', e => {
+    const r = card.getBoundingClientRect();
+    const x = (e.clientX - r.left) / r.width - .5;
+    const y = (e.clientY - r.top) / r.height - .5;
+    const px = e.clientX - r.left, py = e.clientY - r.top;
+    card.style.transform = `perspective(1000px) rotateY(${x*5}deg) rotateX(${-y*4}deg) translateZ(14px) scale(1.015)`;
+    card.style.boxShadow = `${-x*18}px ${-y*14}px 40px rgba(28,61,46,.18), 0 24px 60px rgba(28,61,46,.12)`;
+    if (glowEl) { glowEl.style.left = px+'px'; glowEl.style.top = py+'px'; }
+  });
+  card.addEventListener('mouseleave', () => {
+    card.style.transition = 'transform .65s cubic-bezier(.23,1,.32,1), box-shadow .5s ease';
+    card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateZ(0) scale(1)';
+    card.style.boxShadow = '';
+    if (glowEl) glowEl.style.opacity = '0';
+  });
+})
+
+/* ── COPY EMAIL ───────────────────────────────────── */
+function copyEmail() {
+  const email = 'nathanaeloba1@gmail.com';
+  const btn = document.querySelector('.c-copy');
+  navigator.clipboard.writeText(email).then(() => {
+    btn.textContent = 'Copied!';
+    setTimeout(() => btn.textContent = 'Copy address', 2000);
+  }).catch(() => {
+    const el = document.getElementById('email-disp');
+    const range = document.createRange(); range.selectNode(el);
+    window.getSelection().removeAllRanges(); window.getSelection().addRange(range);
+    btn.textContent = 'Selected : Ctrl+C to copy';
+    setTimeout(() => { btn.textContent='Copy address'; window.getSelection().removeAllRanges(); }, 2500);
+  });
+}
+
+/* ── FULL-SCREEN INTERNAL PROJECT VIEWER CONTROLLER ── */
+const projectData = [
+  {
+    title: "Caroline Vieira",
+    category: "Integrative Transpersonal Psychotherapy",
+    previewImg: "assets/images/projects/project-01-preview.jpg",
+    fullImg: "assets/images/projects/project-01-full.jpg",
+    meta: "Focus: Integrative Transpersonal Therapy &middot; Scope: Website Design &amp; Client Enquiry Structure",
+    desc: "A calm, welcoming website for Caroline Vieira, offering integrative transpersonal psychotherapy in Coleford and the Forest of Dean. The design communicates confidentiality, emotional support and accessible therapy, with clear pathways to explore in-person and online sessions."
+  },
+  {
+    title: "SDB Counselling",
+    category: "Private Counselling &amp; Psychotherapy",
+    previewImg: "assets/images/projects/project-02-preview.jpg",
+    fullImg: "assets/images/projects/project-02-full.jpg",
+    meta: "Location: Bromley &amp; Harley Street, London &middot; Scope: Practice Information Architecture",
+    desc: "A professional, welcoming website for a counselling and psychotherapy practice offering individual counselling, couples counselling, family counselling, mediation, life coaching and online sessions. The design makes services easy to explore while providing clear information and straightforward consultation booking options."
+  },
+  {
+    title: "Serenova",
+    category: "Therapy &amp; Wellness Coaching",
+    previewImg: "assets/images/projects/project-03-preview.jpg",
+    fullImg: "assets/images/projects/project-03-full.jpg",
+    meta: "Focus: Therapy &amp; Wellness Coaching &middot; Scope: Website Design &amp; Booking Experience",
+    desc: "A warm, calming website for a therapy and wellness coaching brand, designed to help visitors explore support for stress, anxiety, emotional overwhelm and life transitions. The experience combines reassuring messaging, a clear service presentation and accessible pathways to book a session or take a wellness assessment."
+  },
+  {
+    title: "Vanguard",
+    category: "Executive Leadership &amp; Strategic Advisory",
+    previewImg: "assets/images/projects/project-04-preview.png",
+    fullImg: "assets/images/projects/project-04-full.png",
+    meta: "Focus: Executive Leadership &amp; Strategic Advisory &middot; Scope: Website Design &amp; Brand Positioning",
+    desc: "A premium digital presence for Vanguard, presenting strategic advisory, leadership consulting, workshops and coaching for high-level business operators. The design communicates authority, discretion and strategic clarity through a sophisticated visual identity and focused messaging."
+  }
+];
+
+let currentProjectIdx = 0;
+
+function openFullscreenViewer(idx) {
+  currentProjectIdx = idx;
+  loadProjectIntoViewer(idx);
+
+  const viewer = document.getElementById('fullscreenViewer');
+  const mainStage = document.getElementById('fpvMainStage');
+
+  viewer.hidden = false;
+  viewer.classList.add('active');
+  document.documentElement.classList.add('fpv-open');
+  document.body.classList.add('fpv-open');
+
+  // Focus the main stage so keyboard keys (Down, Up, PageDown, Space) scroll the screenshot immediately
+  if (mainStage) {
+    mainStage.scrollTop = 0;
+    mainStage.focus();
+  }
+}
+
+function closeFullscreenViewer() {
+  const viewer = document.getElementById('fullscreenViewer');
+
+  viewer.classList.remove('active');
+  viewer.hidden = true;
+
+  // Restore normal page scrolling on both html and body
+  document.documentElement.classList.remove('fpv-open');
+  document.body.classList.remove('fpv-open');
+
+  // Return focus to the project trigger button
+  const triggerBtn = document.querySelector(`[data-proj-trigger="${currentProjectIdx}"]`);
+  if (triggerBtn) triggerBtn.focus();
+}
+
+function loadProjectIntoViewer(idx) {
+  const p = projectData[idx];
+  if (!p) return;
+
+  document.getElementById('fpvCategory').textContent = p.category;
+  document.getElementById('fpvTitle').textContent = p.title;
+  document.getElementById('fpvMeta').innerHTML = p.meta;
+  const imgEl = document.getElementById('fpvMainImage');
+  const fallbackPathEl = document.getElementById('fpvFallbackPath');
+  const viewportWrap = document.getElementById('fpvImageViewport');
+  
+  if (viewportWrap) viewportWrap.classList.remove('img-fallback-active');
+  imgEl.src = p.fullImg;
+  imgEl.alt = p.title + " full project website screenshot";
+  if (fallbackPathEl) fallbackPathEl.textContent = p.fullImg;
+
+  // Scroll stage back to top
+  const stage = document.getElementById('fpvMainStage');
+  if (stage) stage.scrollTop = 0;
+
+  // Update navigation controls & circular titles
+  const total = projectData.length;
+  const prevIdx = (idx - 1 + total) % total;
+  const nextIdx = (idx + 1) % total;
+
+  document.getElementById('fpvCounter').textContent = `Project ${idx + 1} of ${total}`;
+  document.getElementById('fpvPrevLabel').textContent = `(${projectData[prevIdx].title})`;
+  document.getElementById('fpvNextLabel').textContent = `(${projectData[nextIdx].title})`;
+}
+
+function navigateProject(direction) {
+  const total = projectData.length;
+  currentProjectIdx = (currentProjectIdx + direction + total) % total;
+  loadProjectIntoViewer(currentProjectIdx);
+}
+
+// Keyboard controls
+document.addEventListener('keydown', e => {
+  const viewer = document.getElementById('fullscreenViewer');
+  if (!viewer || viewer.hidden || !viewer.classList.contains('active')) return;
+
+  if (e.key === 'Escape') {
+    closeFullscreenViewer();
+  } else if (e.key === 'ArrowLeft') {
+    navigateProject(-1);
+  } else if (e.key === 'ArrowRight') {
+    navigateProject(1);
+  }
+});
+
+</script>
+
+<!-- ══ DEDICATED FULL-SCREEN PROJECT VIEWER (SEPARATE PAGE EXPERIENCE) ══ -->
+<div class="fullscreen-project-viewer" id="fullscreenViewer" role="dialog" aria-modal="true" aria-labelledby="fpvTitle" hidden>
+  <!-- Top Section -->
+  <header class="fpv-header">
+    <div class="fpv-header-title-box">
+      <span class="fpv-category-badge" id="fpvCategory">Therapy Practice</span>
+      <h2 class="fpv-header-title" id="fpvTitle">Project Name</h2>
+      <span class="fpv-header-meta" id="fpvMeta">Design &amp; Information Architecture</span>
+    </div>
+    <button class="fpv-close-btn" id="fpvCloseBtn" onclick="closeFullscreenViewer()" aria-label="Close project viewer and return to website">
+      <span aria-hidden="true">&times;</span> Close Showcase
+    </button>
+  </header>
+
+  <!-- Main Viewing Area (Dedicated vertical scroll stage with tabindex for keyboard navigation) -->
+  <main class="fpv-main-stage" id="fpvMainStage" tabindex="-1">
+    <div class="fpv-viewport-frame">
+      <div class="fpv-frame-bar">
+        <div class="b-dots"><span></span><span></span><span></span></div>
+        </div>
+      <div class="fpv-image-viewport img-fallback-wrap" id="fpvImageViewport">
+        <img id="fpvMainImage" src="" alt="Full project website preview" loading="lazy" onerror="this.closest('.img-fallback-wrap')?.classList.add('img-fallback-active')">
+        <div class="img-fallback-placeholder">
+          <span style="font-size:2.5rem;margin-bottom:.75rem;">🖼️</span>
+          <span style="font-size:.9rem;font-weight:600;text-transform:uppercase;">Full Project Screenshot</span>
+          <span style="font-size:.8rem;color:var(--dim);margin-top:.4rem;" id="fpvFallbackPath">assets/images/projects/...</span>
+        </div>
+      </div>
+    </div>
+    <div class="fpv-scroll-hint">&darr; Scroll down to inspect full website page &darr;</div>
+  </main>
+
+  <!-- Bottom Navigation -->
+  <footer class="fpv-footer">
+    <button class="fpv-nav-btn prev" id="fpvPrevBtn" onclick="navigateProject(-1)">
+      &larr; Previous <span class="fpv-nav-title" id="fpvPrevLabel"></span>
+    </button>
+    <div class="fpv-counter" id="fpvCounter">Project 1 of 4</div>
+    <button class="fpv-nav-btn next" id="fpvNextBtn" onclick="navigateProject(1)">
+      Next <span class="fpv-nav-title" id="fpvNextLabel"></span> &rarr;
+    </button>
+  </footer>
+</div>
+</body>
+</html>

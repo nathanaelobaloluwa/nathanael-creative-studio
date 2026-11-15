@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <!-- Left Column Front Face -->
+    <linearGradient id="monoLeftFront" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#144627" />
+      <stop offset="45%" stop-color="#0E331B" />
+      <stop offset="100%" stop-color="#071E0F" />
+    </linearGradient>
+
+    <!-- Top Ribbon Fold -->
+    <linearGradient id="monoTopFold" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0C2C18" />
+      <stop offset="35%" stop-color="#154B2A" />
+      <stop offset="70%" stop-color="#1F673B" />
+      <stop offset="100%" stop-color="#2B834C" />
+    </linearGradient>
+
+    <!-- Diagonal Stroke -->
+    <linearGradient id="monoDiagonal" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#092614" />
+      <stop offset="50%" stop-color="#05190C" />
+      <stop offset="100%" stop-color="#031108" />
+    </linearGradient>
+
+    <!-- Right Column & Wing Leaf -->
+    <linearGradient id="monoRightWing" x1="0%" y1="100%" x2="80%" y2="0%">
+      <stop offset="0%" stop-color="#071F10" />
+      <stop offset="35%" stop-color="#103B20" />
+      <stop offset="70%" stop-color="#1B5B33" />
+      <stop offset="100%" stop-color="#287B47" />
+    </linearGradient>
+
+    <!-- Vibrant Green Swoosh Gradient -->
+    <linearGradient id="monoSwoosh" x1="5%" y1="95%" x2="95%" y2="5%">
+      <stop offset="0%" stop-color="#146633" />
+      <stop offset="20%" stop-color="#16A34A" />
+      <stop offset="55%" stop-color="#22C55E" />
+      <stop offset="80%" stop-color="#4ADE80" />
+      <stop offset="100%" stop-color="#86EFAC" />
+    </linearGradient>
+
+    <!-- Swoosh Ridge Highlight -->
+    <linearGradient id="monoSpine" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#22C55E" stop-opacity="0" />
+      <stop offset="30%" stop-color="#86EFAC" stop-opacity="0.75" />
+      <stop offset="70%" stop-color="#DCFCE7" stop-opacity="0.95" />
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0.95" />
+    </linearGradient>
+
+    <!-- Drop Shadow Filter for Swoosh -->
+    <filter id="monoSwooshShadow" x="-20%" y="-20%" width="150%" height="150%">
+      <feDropShadow dx="3" dy="9" stdDeviation="8" flood-color="#010803" flood-opacity="0.7" />
+    </filter>
+  </defs>
+
+  
+
+  <g id="monogram-art">
+    <!-- Left Vertical Column Front -->
+    <path d="M 148 152 L 216 220 L 216 388 L 148 388 Z" fill="url(#monoLeftFront)" />
+
+    <!-- Top Ribbon Fold (Left column curling gracefully over into the diagonal) -->
+    <path d="M 148 152 C 148 102 182 82 226 82 C 248 82 262 96 266 116 L 216 220 Z" fill="url(#monoTopFold)" />
+
+    <!-- Diagonal Underlayer -->
+    <path d="M 216 152 L 266 116 L 362 388 L 296 388 Z" fill="url(#monoDiagonal)" />
+
+    <!-- Right Stem & Elegant Wing Tip -->
+    <path d="M 296 388 L 364 388 L 364 242 C 364 182 384 126 426 84 C 386 110 336 160 300 242 Z" fill="url(#monoRightWing)" />
+
+    <!-- The Signature Vibrant Green Crescent Swoosh -->
+    <g filter="url(#monoSwooshShadow)">
+      <path d="M 68 350 C 118 368 174 356 222 322 C 286 276 354 194 426 84 C 362 170 296 256 232 314 C 180 358 122 374 68 350 Z" fill="url(#monoSwoosh)" />
+    </g>
+
+    <!-- Luminous Spine Highlight along the upper ridge of the swoosh -->
+    <path d="M 85 352 C 132 366 182 348 226 318 C 288 272 354 190 426 84" fill="none" stroke="url(#monoSpine)" stroke-width="3.2" stroke-linecap="round" />
+
+    <!-- Subtle Accent Sheen on Top Fold -->
+    <path d="M 154 144 C 154 106 184 90 224 88" fill="none" stroke="#4ADE80" stroke-width="2" stroke-opacity="0.45" stroke-linecap="round" />
+  </g>
+</svg>

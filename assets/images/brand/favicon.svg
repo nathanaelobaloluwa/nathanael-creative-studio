@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="favBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#143A23" />
+      <stop offset="100%" stop-color="#0B2314" />
+    </linearGradient>
+
+    <!-- Left Column Front Face -->
+    <linearGradient id="favLeftFront" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#18522E" />
+      <stop offset="100%" stop-color="#0C3018" />
+    </linearGradient>
+
+    <!-- Top Ribbon Fold -->
+    <linearGradient id="favTopFold" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#103C20" />
+      <stop offset="50%" stop-color="#1E6539" />
+      <stop offset="100%" stop-color="#2E8B51" />
+    </linearGradient>
+
+    <!-- Diagonal -->
+    <linearGradient id="favDiag" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0E351C" />
+      <stop offset="100%" stop-color="#061D0D" />
+    </linearGradient>
+
+    <!-- Right Wing -->
+    <linearGradient id="favRightWing" x1="0%" y1="100%" x2="80%" y2="0%">
+      <stop offset="0%" stop-color="#0C3018" />
+      <stop offset="60%" stop-color="#1E6539" />
+      <stop offset="100%" stop-color="#2E8B51" />
+    </linearGradient>
+
+    <!-- Vibrant Green Swoosh Gradient -->
+    <linearGradient id="favSwoosh" x1="5%" y1="95%" x2="95%" y2="5%">
+      <stop offset="0%" stop-color="#16A34A" />
+      <stop offset="50%" stop-color="#22C55E" />
+      <stop offset="85%" stop-color="#4ADE80" />
+      <stop offset="100%" stop-color="#86EFAC" />
+    </linearGradient>
+
+    <!-- Spine Highlight -->
+    <linearGradient id="favSpine" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#22C55E" stop-opacity="0" />
+      <stop offset="50%" stop-color="#86EFAC" stop-opacity="0.9" />
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="1" />
+    </linearGradient>
+
+    <!-- Drop Shadow Filter for Swoosh -->
+    <filter id="favShadow" x="-20%" y="-20%" width="150%" height="150%">
+      <feDropShadow dx="4" dy="10" stdDeviation="10" flood-color="#000000" flood-opacity="0.75" />
+    </filter>
+  </defs>
+
+  <!-- Deep Forest Green Background -->
+  <rect width="512" height="512" rx="108" fill="url(#favBg)" />
+
+  <!-- Subtle Inner Border for Contrast -->
+  <rect width="508" height="508" x="2" y="2" rx="106" fill="none" stroke="#2D7A4A" stroke-width="4" stroke-opacity="0.3" />
+
+  <!-- Centered Scaled Monogram (Scale 0.86, translate 36, 36) -->
+  <g transform="translate(36, 36) scale(0.86)">
+    <!-- Left Column Front Face -->
+    <path d="M 148 152 L 216 220 L 216 388 L 148 388 Z" fill="url(#favLeftFront)" />
+
+    <!-- Top Ribbon Fold -->
+    <path d="M 148 152 C 148 102 182 82 226 82 C 248 82 262 96 266 116 L 216 220 Z" fill="url(#favTopFold)" />
+
+    <!-- Diagonal Underlayer -->
+    <path d="M 216 152 L 266 116 L 362 388 L 296 388 Z" fill="url(#favDiag)" />
+
+    <!-- Right Stem & Wing Tip -->
+    <path d="M 296 388 L 364 388 L 364 242 C 364 182 384 126 426 84 C 386 110 336 160 300 242 Z" fill="url(#favRightWing)" />
+
+    <!-- Signature Vibrant Swoosh -->
+    <g filter="url(#favShadow)">
+      <path d="M 68 350 C 118 368 174 356 222 322 C 286 276 354 194 426 84 C 362 170 296 256 232 314 C 180 358 122 374 68 350 Z" fill="url(#favSwoosh)" />
+    </g>
+
+    <!-- Spine Highlight -->
+    <path d="M 85 352 C 132 366 182 348 226 318 C 288 272 354 190 426 84" fill="none" stroke="url(#favSpine)" stroke-width="4.2" stroke-linecap="round" />
+
+    <!-- Accent Sheen on Top Fold -->
+    <path d="M 154 144 C 154 106 184 90 224 88" fill="none" stroke="#4ADE80" stroke-width="2.6" stroke-opacity="0.6" stroke-linecap="round" />
+  </g>
+</svg>

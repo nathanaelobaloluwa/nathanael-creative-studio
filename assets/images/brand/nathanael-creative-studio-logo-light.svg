@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 110" width="540" height="110">
+  <defs>
+    <!-- Left Column Front Face -->
+    <linearGradient id="hLeftFront_l" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1F6137" />
+      <stop offset="45%" stop-color="#154829" />
+      <stop offset="100%" stop-color="#0D331B" />
+    </linearGradient>
+
+    <!-- Top Ribbon Fold -->
+    <linearGradient id="hTopFold_l" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0E331B" />
+      <stop offset="35%" stop-color="#18562F" />
+      <stop offset="70%" stop-color="#247543" />
+      <stop offset="100%" stop-color="#349B5B" />
+    </linearGradient>
+
+    <!-- Diagonal Stroke -->
+    <linearGradient id="hDiagonal_l" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#144426" />
+      <stop offset="50%" stop-color="#0F341C" />
+      <stop offset="100%" stop-color="#0B2715" />
+    </linearGradient>
+
+    <!-- Right Column & Wing Leaf -->
+    <linearGradient id="hRightWing_l" x1="0%" y1="100%" x2="80%" y2="0%">
+      <stop offset="0%" stop-color="#123D23" />
+      <stop offset="35%" stop-color="#1C5B33" />
+      <stop offset="70%" stop-color="#267945" />
+      <stop offset="100%" stop-color="#329858" />
+    </linearGradient>
+
+    <!-- Vibrant Green Swoosh Gradient -->
+    <linearGradient id="hSwoosh_l" x1="5%" y1="95%" x2="95%" y2="5%">
+      <stop offset="0%" stop-color="#146633" />
+      <stop offset="20%" stop-color="#16A34A" />
+      <stop offset="55%" stop-color="#22C55E" />
+      <stop offset="80%" stop-color="#4ADE80" />
+      <stop offset="100%" stop-color="#86EFAC" />
+    </linearGradient>
+
+    <!-- Swoosh Ridge Highlight -->
+    <linearGradient id="hSpine_l" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#22C55E" stop-opacity="0" />
+      <stop offset="30%" stop-color="#86EFAC" stop-opacity="0.8" />
+      <stop offset="70%" stop-color="#DCFCE7" stop-opacity="0.95" />
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="1" />
+    </linearGradient>
+
+    <!-- Drop Shadow Filter for Swoosh -->
+    <filter id="hSwooshShadow_l" x="-20%" y="-20%" width="150%" height="150%">
+      <feDropShadow dx="1.5" dy="3.5" stdDeviation="3.5" flood-color="#010803" flood-opacity="0.6" />
+    </filter>
+  </defs>
+
+  <!-- Monogram on Left (94px height, vertically centered in 110px canvas) -->
+  <g transform="translate(8, 8) scale(0.24)">
+    <!-- Left Vertical Column Front -->
+    <path d="M 148 152 L 216 220 L 216 388 L 148 388 Z" fill="url(#hLeftFront_l)" />
+
+    <!-- Top Ribbon Fold -->
+    <path d="M 148 152 C 148 102 182 82 226 82 C 248 82 262 96 266 116 L 216 220 Z" fill="url(#hTopFold_l)" />
+
+    <!-- Diagonal Underlayer -->
+    <path d="M 216 152 L 266 116 L 362 388 L 296 388 Z" fill="url(#hDiagonal_l)" />
+
+    <!-- Right Stem & Elegant Wing Tip -->
+    <path d="M 296 388 L 364 388 L 364 242 C 364 182 384 126 426 84 C 386 110 336 160 300 242 Z" fill="url(#hRightWing_l)" />
+
+    <!-- Swoosh with Shadow -->
+    <g filter="url(#hSwooshShadow_l)">
+      <path d="M 68 350 C 118 368 174 356 222 322 C 286 276 354 194 426 84 C 362 170 296 256 232 314 C 180 358 122 374 68 350 Z" fill="url(#hSwoosh_l)" />
+    </g>
+
+    <!-- Spine Highlight -->
+    <path d="M 85 352 C 132 366 182 348 226 318 C 288 272 354 190 426 84" fill="none" stroke="url(#hSpine_l)" stroke-width="3.2" stroke-linecap="round" />
+
+    <!-- Accent Sheen on Top Fold -->
+    <path d="M 154 144 C 154 106 184 90 224 88" fill="none" stroke="#4ADE80" stroke-width="2" stroke-opacity="0.45" stroke-linecap="round" />
+  </g>
+
+  <!-- Typography Lockup on Right -->
+  <g transform="translate(132, 0)">
+    <!-- Primary Brand Name: NATHANAEL -->
+    <text x="0" y="58" 
+          font-family="'Inter', 'Playfair Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" 
+          font-size="42" 
+          font-weight="800" 
+          letter-spacing="0.14em" 
+          fill="#F7F5F0">NATHANAEL</text>
+
+    <!-- Symmetrical Subtitle Lockup: Left Vector Rule, Centered CREATIVE STUDIO, Right Vector Rule -->
+    <!-- Left vector rule (46px long) -->
+    <line x1="0" y1="82" x2="46" y2="82" stroke="#22C55E" stroke-width="1.8" stroke-linecap="round" />
+
+    <!-- CREATIVE STUDIO text -->
+    <text x="56" y="86" 
+          font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" 
+          font-size="14" 
+          font-weight="600" 
+          letter-spacing="0.30em" 
+          fill="#F7F5F0">CREATIVE STUDIO</text>
+
+    <!-- Right vector rule (46px long, perfectly flush at x=334) -->
+    <line x1="288" y1="82" x2="334" y2="82" stroke="#22C55E" stroke-width="1.8" stroke-linecap="round" />
+  </g>
+</svg>
